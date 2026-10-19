@@ -4,11 +4,13 @@
 
 Hi 4TU / Homebrew App Store team,
 
-I'd like to submit **Performance Modes**, an open-source Ultrahand package for Nintendo Switch.
+I'd like to submit **Performance Modes**, an open-source Ultrahand package for Nintendo Switch and Horizon OC.
 
-It is designed for Horizon OC users who want to keep two separate complete setups: a normal Performance profile and a Battery profile. The package switches the full Horizon OC configuration and `hoc.kip`, including per-game Horizon clock profiles, and automatically saves the profile being left before loading the other one.
+It switches between two complete Horizon OC setups: a normal high-performance OC profile and a separate **stock-clock undervolting / efficiency profile** called Battery Mode. Performance Mode can keep the voltage and memory headroom needed for higher clocks, while Battery Mode can be tuned specifically for Nintendo stock handheld clocks to reduce power consumption.
 
-The Battery profile is intended to make it practical to run stock handheld clocks with separately tuned VDD2, VDDQ and CPU High UV settings for better efficiency. The project does not ship fixed OC/UV values; users must create and stability-test their own settings.
+The package switches the full Horizon OC configuration and `hoc.kip`, including per-game Horizon clock profiles, and automatically saves the profile being left before loading the other one. Battery per-game clock overrides can also be reset to stock/default from the package menu.
+
+On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 at the same stock game clocks (+9.9%) after tuning the Battery voltage profile. This is only an example; the project does not ship fixed OC/UV values and users must stability-test their own settings.
 
 This is **not a standalone `.nro`**. It is an Ultrahand package installed under:
 
