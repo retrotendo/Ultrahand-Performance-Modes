@@ -1,8 +1,10 @@
-# Homebrew App Store submission — ready-to-paste fields
+# Homebrew App Store submission — ready to paste
 
-Use the official submission form: https://submit.fortheusers.org/
+Official form: https://submit.fortheusers.org/
 
-## Fields
+The current form asks for console, app title, author, category, contact info, version, license, app URL, short description, detailed description, changelog, banner and icon.
+
+## Form fields
 
 **Console**  
 Switch
@@ -14,10 +16,10 @@ Performance Modes
 retrotendo
 
 **Category**  
-Tools / Utilities (choose the closest available category)
+Utilities / Tools if available. Otherwise use Misc.
 
 **Contact info**  
-Enter your own e-mail address or Discord handle. This is the only intentionally personal field not filled in here.
+Enter your own e-mail address or Discord handle.
 
 **Version**  
 1.0
@@ -29,51 +31,29 @@ MIT
 https://github.com/retrotendo/Ultrahand-Performance-Modes
 
 **Short description**  
-Create and switch separate Battery and Performance profiles for Horizon OC directly from Ultrahand.
+Switch between complete Horizon OC Battery and Performance profiles directly from Ultrahand.
 
 **Detailed description**  
-Performance Modes is an Ultrahand package for Horizon OC. It is useful if you want one profile tuned for maximum overclocking performance and a second profile tuned for battery life.
+Performance Modes is an Ultrahand package for Horizon OC that lets you keep two complete setups: Performance and Battery.
 
-A normal overclock profile is often configured around the highest stable CPU/RAM clocks. That can require higher VDD2/VDDQ and more CPU voltage headroom than a game running at stock clocks actually needs. With Performance Modes you can keep those high-performance settings in **Performance Mode**, while creating a separate **Battery Mode** for lower or stock frequencies.
+Performance Mode can keep your normal high-clock OC settings. Battery Mode is intended for stock handheld clocks, where VDD2, VDDQ and CPU High UV can be tuned for lower power use. On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 at the same stock game clocks (+9.9%).
 
-For a Battery profile, the main idea is simple: use stock or otherwise conservative clocks, then lower **VDD2** and **VDDQ** and increase **CPU High UV** only as far as your own console remains fully stable. This is where the largest efficiency gains can come from. Do not copy somebody else's voltage limits blindly; every CPU and RAM setup is different and must be stability-tested.
+The package switches the full Horizon OC config, hoc.kip and all per-game Horizon clock profiles. Battery app profiles can be reset to stock/default clocks from the menu. ReverseNX-RT per-title settings are also handled when installed.
 
-The package stores the complete Horizon OC `config.ini` and `hoc.kip` for both modes. That means Horizon's global settings and **all per-game app profiles** are switched together with the mode. New title-ID profiles are included automatically because the full config file is saved. A menu function can reset the stored Battery app profiles back to stock/default clocks by removing their per-title CPU/GPU/RAM overrides.
+When changing mode, the current profile is saved, the other profile is loaded and CFW reboots. This reboot is intentional and required to load the selected hoc.kip.
 
-If ReverseNX-RT is installed, its per-title `.dat` settings are silently saved and restored with each mode as well.
-
-When changing mode, the current mode is automatically saved first, the target profile is restored, and the Switch performs a **CFW reboot**. The reboot is intentional and required so the selected `hoc.kip` / Horizon OC profile is actually loaded for the new boot.
-
-### Example from the development console
-
-Red Dead Redemption was tested with the **same stock game clocks/settings** using two different Horizon OC voltage profiles:
-
-- Performance profile: **VDD2 1087.5 mV, VDDQ 600 mV**
-- Battery profile: **VDD2 about 912.5 mV, VDDQ 400 mV**
-- CPU High UV in Battery Mode was tuned separately for the stock-frequency operating point; users should find their own lowest stable setting instead of copying a fixed number.
-
-Measured runtime:
-
-- Performance profile: **5 h 32 min**
-- Battery profile: **6 h 05 min**
-
-That is **33 minutes longer**, about **+9.9% runtime**, which corresponds to roughly **9.0% lower average whole-device power draw** for the same usable battery energy in that test.
-
-This result is only an example from one console and one workload. Actual savings depend on silicon quality, RAM, battery condition, brightness, game workload and the settings used.
-
-### Main functions in simple terms
-
-- **Battery Mode** — saves the current Performance setup, loads the Battery setup and reboots CFW.
-- **Performance Mode** — saves the current Battery setup, loads the Performance setup and reboots CFW.
-- **Save Settings -> as Battery Mode / as Performance Mode** — manually stores the current Horizon OC config, `hoc.kip` and optional ReverseNX-RT app settings into that slot.
-- **Reset Battery App Profiles -> STOCK** — removes stored per-game CPU/GPU/RAM clock overrides from Battery Mode while keeping Battery's global Horizon OC settings.
-- **Mark Current Boot** — tells the package which profile was actually loaded for the current boot. If the state is unknown, automatic switching will not overwrite either saved profile.
-- **Create / Restore Safety Backup** — keeps one manual recovery snapshot of the active setup plus both saved modes.
-
-Performance Modes does not provide or validate overclock/undervolt values. Users must stability-test their own settings.
+Requires Ultrahand and Horizon OC. Voltage/UV settings are console-specific and must be stability-tested by the user.
 
 **Changelog**  
-Version 1.0 initial release:\n- Battery / Performance mode switching\n- Full Horizon OC config + hoc.kip profiles\n- Automatic outgoing-profile save\n- Per-title Horizon app profiles included automatically\n- Optional ReverseNX-RT per-title settings integration\n- Battery app-profile reset to stock/default clocks\n- Manual Safety Backup / Restore\n- Unknown/UNSET state protection
+Initial release:
+- Battery / Performance profile switching
+- Full Horizon OC config + hoc.kip saved per mode
+- Automatic save of the profile being left
+- Per-game Horizon clock profiles switch with each mode
+- Reset Battery app profiles to stock/default clocks
+- Optional ReverseNX-RT per-title profile handling
+- Manual Safety Backup / Restore
+- Protection against overwriting profiles when current state is unknown
 
 **Banner image**  
 `assets/hbas-banner.jpg`
@@ -81,11 +61,32 @@ Version 1.0 initial release:\n- Battery / Performance mode switching\n- Full Hor
 **Icon**  
 `assets/icon.png`
 
-## Submission checklist
+## Notes for the reviewer
 
-- Repository is public.
-- Source/config package is included under `package/`.
-- Installable SD-root ZIP is included under `dist/`.
-- MIT license is included.
-- README contains requirements, setup, normal usage, safety behavior and tuning background.
-- Banner and icon are included under `assets/`.
+Performance Modes is an **Ultrahand package**, not a standalone `.nro` application. The install ZIP places the package under:
+
+```text
+/switch/.packages/Performance Modes/
+```
+
+Required existing software:
+
+- Ultrahand Overlay
+- Horizon OC
+
+ReverseNX-RT support is optional.
+
+The project does not ship personal overclock/undervolt profiles. Users create and stability-test their own Battery and Performance settings.
+
+## Final checklist before submitting
+
+- Public GitHub repository: ready
+- MIT license: ready
+- README and setup guide: ready
+- Battery tuning guide: ready
+- Installable SD-root ZIP: ready
+- Banner: ready
+- Icon: ready
+- Changelog: ready
+- Contact field: user must enter e-mail or Discord handle
+- GitHub release: recommended before submission so future releases can be detected automatically by HBAS
