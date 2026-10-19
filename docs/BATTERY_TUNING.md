@@ -9,32 +9,34 @@ A normal maximum-performance OC profile is often built around the highest CPU/RA
 
 ## Recommended Battery target
 
-For a true efficiency profile, start by keeping the intended Battery operating range close to Nintendo stock handheld clocks.
+For a true efficiency profile, keep the Battery operating range at Nintendo stock handheld clocks.
 
 For validation, use **Temporary Overrides** only for the component currently being tested:
 
 | Component | Battery validation target |
 | --- | ---: |
 | CPU | **1785 MHz** stock boost step |
-| GPU | **384 MHz** for strict Nintendo stock handheld; optionally **460.8 MHz** if you deliberately want to validate the classic handheld maximum clock step |
+| GPU | **384 MHz** stock handheld maximum |
 | RAM | **1600 MHz** stock boost-memory step |
 
-**768 MHz is the official docked GPU clock, not the normal stock handheld Battery target.** Horizon OC / uncapped profiles can request 768 MHz or more in handheld on supported Mariko setups, but that is no longer the stock-frequency Battery profile described by this guide.
+CPU and RAM boost behavior can still reach **1785 MHz CPU** and **1600 MHz RAM**, so an efficiency profile that should remain reliable during normal boost/load behavior must be stable there.
 
-CPU and RAM are different: Nintendo's boost behavior can use the **1785 MHz CPU** and **1600 MHz RAM** steps, so an efficiency profile that should remain reliable during stock boost/load behavior still needs to be stable there.
+### Important: setting the CPU maximum to stock boost
 
-If Horizon OC only allows `CPU Max Clock` / `CPU Boost Clock` down to about **1963 MHz** on Mariko, that is not a problem by itself. Those values are ceilings in the HOC configuration; the actual requested CPU clock can still be lower.
+In Horizon OC itself, `CPU Max Clock` and `CPU Boost Clock` cannot currently be lowered all the way to **1785 MHz** through the normal Horizon settings screen.
+
+Set both values to **1785 MHz in HOC Toolkit instead**. Apply/save the HOC configuration there (HOC Toolkit writes the active `hoc.kip`), then reboot CFW. After the reboot, Horizon OC uses the values from that KIP and the 1785 MHz limits are reflected in the active configuration.
 
 For the finished Battery profile, also consider:
 
 - `uncapped_clocks = 0` if you do not need OC-only clock steps.
 - Stock/default per-title app clocks using `Setup -> Reset Battery App Profiles -> STOCK`.
-- A conservative RAM maximum if Battery Mode is not intended to use RAM OC.
-- Only tune GPU voltage points up to the highest handheld GPU clock you actually intend Battery Mode to use.
+- Keep RAM at stock speed if Battery Mode is intended purely for efficiency.
+- Tune only the GPU voltage points used by stock handheld clocks.
 
 ## Suggested tuning order
 
-The exact historical order in which the development console's VDD2 and VDDQ were first discovered is not preserved well enough to document confidently. The procedure below is therefore the **recommended reproducible order** for new users: isolate one area, find its edge, add stability margin, then move to the next area.
+The procedure below is a reproducible way to tune one area at a time: isolate one voltage domain, find its stability edge, add margin, then move to the next area.
 
 ### 1. Start from a known-good baseline
 
@@ -45,7 +47,7 @@ Before reducing anything:
 3. If Battery should have no per-game OC profiles, use `Reset Battery App Profiles -> STOCK` while Performance is the confirmed current mode.
 4. Switch to Battery Mode.
 5. Start with voltages / UV values that are already known stable.
-6. Use Temporary Overrides only for the part being tested: CPU **1785**, RAM **1600**, and GPU **384 MHz** for strict stock handheld (or **460.8 MHz** if you intentionally want that additional handheld clock step validated).
+6. Use Temporary Overrides only for the part being tested: CPU **1785**, RAM **1600**, or GPU **384 MHz**.
 
 Do not lower VDD2, VDDQ, CPU High UV and GPU voltage all at the same time. If a test fails you need to know which change caused it.
 
@@ -99,53 +101,52 @@ After both RAM voltages have been tuned separately, run **Memtester for at least
 
 ---
 
-## 4. Tune CPU High UV at the Battery CPU ceiling
+## 4. Tune CPU High UV at stock boost
 
 CPU High UV should be treated as a **profile-specific stability setting**. A Performance profile that must support very high CPU clocks can need more voltage than a Battery profile that only needs stock boost.
 
 For Battery Mode:
 
-1. Set the CPU Temporary Override to **1785 MHz**.
-2. Keep RAM at the already validated stock Battery setting.
-3. Start from a known-stable CPU High UV level.
-4. Increase **CPU High UV** one step at a time (a higher UV setting means a more aggressive undervolt).
-5. Reboot when required so the KIP setting is actually active.
-6. Run **Benchmark Toolbox -> CPU Stress -> Matrixprod**.
-7. Use short passes while approaching the limit, then run a candidate for about **30 minutes**.
-8. Any mismatch, freeze, application crash or CFW reboot means the undervolt is too aggressive. Step back.
+1. Make sure CPU Max Clock / CPU Boost Clock have been set to **1785 MHz through HOC Toolkit** and rebooted once so the KIP is active.
+2. Set the CPU Temporary Override to **1785 MHz**.
+3. Keep RAM at the already validated stock Battery setting.
+4. Start from a known-stable CPU High UV level.
+5. Increase **CPU High UV** one step at a time (a higher UV setting means a more aggressive undervolt).
+6. Reboot when required so the KIP setting is actually active.
+7. Run **Benchmark Toolbox -> CPU Stress -> Matrixprod**.
+8. Use short passes while approaching the limit, then run a candidate for about **30 minutes**.
+9. Any mismatch, freeze, application crash or CFW reboot means the undervolt is too aggressive. Step back.
 
 ### Important telemetry warning
 
 Do not assume two High UV levels are equivalent just because the overlay displays the same rounded CPU voltage. During development, **High UV 12 at stock CPU Boost 1785 MHz displayed about 745 mV but failed the Matrixprod/CPU stress test**. High UV 11 showed the same displayed voltage, which demonstrates why the overlay number alone is not a stability test.
 
-The correct goal is therefore not "reach a particular mV number". The goal is **the most aggressive High UV level that remains stable at the Battery profile's maximum intended CPU clock**.
+The correct goal is therefore not "reach a particular mV number". The goal is **the most aggressive High UV level that remains stable at 1785 MHz**.
 
 ---
 
-## 5. GPU: find the minimum stable voltage for the handheld clock steps you use
+## 5. GPU: find the minimum stable voltage for stock handheld clocks
 
-For an efficiency profile there is little reason to tune GPU voltage points above the maximum GPU frequency Battery Mode will actually request.
-
-For a strict stock handheld profile, focus on **307.2 and 384 MHz**. If you intentionally allow the classic **460.8 MHz handheld maximum step**, validate that as well. **768 MHz belongs to docked / charging use and is not required for a stock handheld Battery profile.**
+For the Battery profile, only the stock handheld GPU range needs to be tuned.
 
 The development console used:
 
 - **Mariko GPU VMIN: 500 mV**
 
-Then each required GPU clock point was validated with **Benchmark Toolbox -> GPU Stress**. The stress tool explicitly reports **Mismatches**; anything above zero indicates instability.
+Validate the required GPU clock points with **Benchmark Toolbox -> GPU Stress**. The stress tool reports **Mismatches**; anything above zero indicates instability.
 
 A practical procedure is:
 
-1. Select one GPU clock with Temporary Overrides.
+1. Select one stock handheld GPU clock with Temporary Overrides.
 2. Run GPU Stress / FurMark at that clock.
 3. Lower that clock point's voltage one available step at a time.
 4. If Mismatches appear, graphics crash, or CFW becomes unstable, go back to the previous stable voltage.
 5. Validate the final candidate for about **30 minutes**.
-6. Repeat only for the GPU clock points Battery Mode actually needs.
+6. Repeat for the other stock handheld GPU clock points you use.
 
-### Development-console GPU table
+### Development-console GPU reference
 
-The following table is included only as a **reference from the development OLED/Mariko console**. It is not a universal safe table.
+The following values are only a **reference from the development OLED/Mariko console**. They are not universal safe values.
 
 | GPU clock | Development-console voltage |
 | ---: | ---: |
@@ -154,30 +155,24 @@ The following table is included only as a **reference from the development OLED/
 | 230.4 MHz | 500 mV |
 | 307.2 MHz | 500 mV |
 | 384.0 MHz | 500 mV |
-| 460.8 MHz | 500 mV |
-| 537.6 MHz | 500 mV |
-| 614.4 MHz | 525 mV |
-| 691.2 MHz | 540 mV |
-| 768.0 MHz | 570 mV |
-
-Only the lower portion is relevant to a strict stock handheld Battery profile. The higher entries are shown because they were present in the development configuration and may be useful to people who intentionally build a less restrictive Battery profile.
 
 ---
 
 ## 6. Final combined validation
 
-Passing the individual tests is only the first stage. Once VDD2, VDDQ, CPU High UV and the required GPU clock points are individually stable, test them together.
+Passing the individual tests is only the first stage. Once VDD2, VDDQ, CPU High UV and the stock handheld GPU points are individually stable, validate the finished Battery profile.
 
-For a stock-oriented handheld Battery profile, validate the relevant worst cases separately rather than forcing an artificial CPU+GPU+RAM combination that stock handheld mode would never normally use:
+Use the relevant stock limits:
 
-- CPU **1785 MHz** + RAM **1600 MHz** for stock boost-path stability.
-- GPU **384 MHz** for strict stock handheld graphics, or **460.8 MHz** if you intentionally allow that handheld clock step.
+- CPU **1785 MHz**
+- RAM **1600 MHz**
+- GPU **384 MHz**
 
 Then run, separately:
 
 1. **CPU Matrixprod — about 30 min**
 2. **RAM Memtester — at least 30 min; 60 min is better for the final RAM combination**
-3. **GPU Stress / FurMark — about 30 min at the highest Battery GPU point you actually use**
+3. **GPU Stress / FurMark — about 30 min at 384 MHz**
 4. Several real games for longer sessions, especially titles that heavily load CPU/RAM/GPU in different ways.
 
 A 30-minute synthetic test is a useful screening test, not absolute proof of long-term stability. If a setting sits right on the edge, real games, shader compilation, loading transitions, sleep/wake or different temperatures can still expose it later. Keep one step of margin if you want a profile that is dependable rather than just benchmark-stable.
