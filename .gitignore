@@ -1,0 +1,10 @@
+# User-generated runtime profile/state files
+**/Battery/
+**/Performance/
+**/Backup/
+**/config.ini
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
