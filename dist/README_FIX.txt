@@ -1,1 +1,0 @@
-Use the corrected v1.0 package after the reboot command fix. This file can be removed before final release.

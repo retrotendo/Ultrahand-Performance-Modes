@@ -1,1 +1,0 @@
-The package source was fixed to use `reboot System`. Replace the old v1.0 ZIP before release/testing.

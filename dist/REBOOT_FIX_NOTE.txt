@@ -1,1 +1,0 @@
-Temporary note: v1.0 package reboot command corrected from `reboot` to `reboot System` for Ultrahand CFW reboot behavior. The corrected dist ZIP should be used for testing.
