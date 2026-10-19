@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hbas-banner.png" alt="Performance Modes banner" width="100%">
+  <img src="assets/hbas-banner.jpg" alt="Performance Modes banner" width="100%">
 </p>
 
 # Performance Modes
@@ -17,26 +17,31 @@ That is useful when maximum performance is the goal, but it can be inefficient w
 Performance Modes makes it practical to keep two completely different Horizon OC configurations:
 
 - **Performance Mode** can keep the voltage, memory and clock headroom needed for high CPU/GPU/RAM frequencies.
-- **Battery Mode** can be tuned only for the frequencies you actually intend to use there — for example stock CPU/GPU/RAM clocks — allowing lower stable voltage settings where your hardware permits it.
+- **Battery Mode** can be tuned only for the frequencies you actually intend to use there — ideally stock or otherwise conservative CPU/GPU/RAM clocks — allowing lower stable voltage settings where your hardware permits it.
 
-On Mariko/OLED systems, the most useful Battery-profile tuning controls can include **VDD2**, **VDDQ** and **CPU High UV**, together with conservative maximum clocks and stock per-title app profiles. The goal is not to copy somebody else's voltages, but to find the lowest settings that remain fully stable at the Battery profile's intended frequencies. Every chip and RAM setup is different, so stability testing is essential.
+On Mariko/OLED systems, the most useful Battery-profile tuning controls can include **VDD2**, **VDDQ** and **CPU High UV**. The basic idea is to run lower/stock frequencies, then reduce VDD2/VDDQ and increase CPU High UV only as far as that lower-frequency profile remains fully stable. Every chip and RAM setup is different, so stability testing is essential.
+
+See the short [Battery tuning guide](docs/BATTERY_TUNING.md) for a practical walkthrough.
 
 ### Example battery-life result
 
-In the development console, Red Dead Redemption was tested at the **same stock game clocks/settings** with the two different Horizon OC profiles:
+In the development console, Red Dead Redemption was tested at the **same stock game clocks/settings** with the two different Horizon OC voltage profiles:
 
-| Profile | Runtime |
-| --- | ---: |
-| Performance profile | 5 h 32 min |
-| Battery profile | 6 h 05 min |
+| Setting | Performance profile | Battery profile |
+| --- | ---: | ---: |
+| VDD2 | 1087.5 mV | ~912.5 mV |
+| VDDQ | 600 mV | 400 mV |
+| Runtime | 5 h 32 min | 6 h 05 min |
 
 That is **33 minutes longer**, or about **+9.9% runtime**. For the same usable battery energy, that corresponds to roughly **9.0% lower average whole-device power draw** during that test.
+
+CPU High UV can also be tuned more aggressively in Battery Mode when it only needs to remain stable at the lower/stock CPU operating point. No fixed High UV number is published here because that limit is silicon-specific and must be stability-tested on each console.
 
 This is only one console and one workload, not a guaranteed result. The actual benefit depends on silicon quality, RAM, voltages, game workload, display brightness, battery condition and the settings used in both profiles.
 
 ## Features
 
-- One-action **Battery Mode ↔ Performance Mode** switching with CFW reboot.
+- One-action **Battery Mode ↔ Performance Mode** switching with an intentional CFW reboot.
 - Automatically saves the mode you are leaving before loading the other one.
 - Stores the complete `/config/horizon-oc/config.ini` per mode.
 - Stores `/atmosphere/kips/hoc.kip` per mode.
@@ -45,6 +50,8 @@ This is only one console and one workload, not a guaranteed result. The actual b
 - **Reset Battery App Profiles -> STOCK** removes standard per-title CPU/GPU/RAM overrides from the stored Battery config while preserving Horizon OC's global `[values]` settings.
 - Manual **Safety Backup / Restore**.
 - Safety state: if the package cannot confirm whether Battery or Performance is active, it does **not** overwrite either stored profile.
+
+The reboot after changing mode is intentional and required: the active `hoc.kip` is replaced during the switch, and CFW must restart so that the selected KIP/profile is actually loaded.
 
 ## Requirements
 
@@ -99,6 +106,16 @@ You normally do **not** need to manually save after changing Horizon OC settings
 
 The manual **Save Settings** entries are useful when you intentionally want to overwrite one stored mode without switching.
 
+## Horizon app profiles
+
+Horizon OC stores its per-game CPU/GPU/RAM profiles inside the same `config.ini` that Performance Modes saves. This means those app profiles automatically change together with Battery/Performance Mode.
+
+If you want the Battery profile to use stock/default game clocks, choose:
+
+`Setup -> Reset Battery App Profiles -> STOCK`
+
+That removes the standard per-title clock override keys from the stored Battery profile while keeping Battery's global Horizon OC `[values]` settings, including its voltage configuration.
+
 ## What is saved per mode?
 
 ```text
@@ -122,12 +139,6 @@ The active source files are:
 ```
 
 ReverseNX-RT stores its per-title saves as `%TITLEID%.dat` files under `/SaltySD/plugins/ReverseNX-RT/`; Performance Modes only touches those `.dat` files and does not replace ReverseNX-RT itself.
-
-## Battery app-profile reset
-
-`Reset Battery App Profiles -> STOCK` is only allowed while **Performance Mode** is the confirmed active state. This prevents the package from editing the Battery profile while it is being used as the live source.
-
-The reset removes the standard Horizon/sys-clk per-title keys (`handheld_*`, `docked_*`, charging variants) from all sections of the stored Battery config. Empty title-ID sections may remain; without clock keys they do not provide a custom clock override. Stored Battery ReverseNX-RT per-title settings are cleared as well.
 
 ## Safety behavior
 
