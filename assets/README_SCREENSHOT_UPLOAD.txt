@@ -1,1 +1,0 @@
-Screenshot upload in progress. Source image is maintained in the project conversation until binary commit is finalized.
