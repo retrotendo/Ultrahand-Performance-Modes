@@ -8,6 +8,32 @@
 
 Instead of changing a few clocks, it stores the whole Horizon OC configuration together with the active `hoc.kip`. Per-title Horizon clock profiles are included automatically. If ReverseNX-RT is installed, its per-title `.dat` settings are stored and restored with the mode as well.
 
+## Why use two OC profiles?
+
+A typical overclocking setup is tuned around the **highest clocks the console can stably reach**. Reaching those clocks often requires more voltage and more aggressive memory settings than stock-frequency gaming actually needs.
+
+That is useful when maximum performance is the goal, but it can be inefficient when playing a game at stock or otherwise modest clocks: the console may still be carrying voltage and memory settings chosen for a much higher-performance operating point.
+
+Performance Modes makes it practical to keep two completely different Horizon OC configurations:
+
+- **Performance Mode** can keep the voltage, memory and clock headroom needed for high CPU/GPU/RAM frequencies.
+- **Battery Mode** can be tuned only for the frequencies you actually intend to use there — for example stock CPU/GPU/RAM clocks — allowing lower stable voltage settings where your hardware permits it.
+
+On Mariko/OLED systems, the most useful Battery-profile tuning controls can include **VDD2**, **VDDQ** and **CPU High UV**, together with conservative maximum clocks and stock per-title app profiles. The goal is not to copy somebody else's voltages, but to find the lowest settings that remain fully stable at the Battery profile's intended frequencies. Every chip and RAM setup is different, so stability testing is essential.
+
+### Example battery-life result
+
+In the development console, Red Dead Redemption was tested at the **same stock game clocks/settings** with the two different Horizon OC profiles:
+
+| Profile | Runtime |
+| --- | ---: |
+| Performance profile | 5 h 32 min |
+| Battery profile | 6 h 05 min |
+
+That is **33 minutes longer**, or about **+9.9% runtime**. For the same usable battery energy, that corresponds to roughly **9.0% lower average whole-device power draw** during that test.
+
+This is only one console and one workload, not a guaranteed result. The actual benefit depends on silicon quality, RAM, voltages, game workload, display brightness, battery condition and the settings used in both profiles.
+
 ## Features
 
 - One-action **Battery Mode ↔ Performance Mode** switching with CFW reboot.
