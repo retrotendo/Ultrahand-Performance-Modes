@@ -76,7 +76,7 @@ Performance Modes does not provide or validate overclock/undervolt values. Users
 Version 1.0 initial release:\n- Battery / Performance mode switching\n- Full Horizon OC config + hoc.kip profiles\n- Automatic outgoing-profile save\n- Per-title Horizon app profiles included automatically\n- Optional ReverseNX-RT per-title settings integration\n- Battery app-profile reset to stock/default clocks\n- Manual Safety Backup / Restore\n- Unknown/UNSET state protection
 
 **Banner image**  
-`assets/hbas-banner.png`
+`assets/hbas-banner.jpg`
 
 **Icon**  
 `assets/icon.png`
