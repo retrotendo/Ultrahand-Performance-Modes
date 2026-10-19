@@ -31,18 +31,20 @@ MIT
 https://github.com/retrotendo/Ultrahand-Performance-Modes
 
 **Short description**  
-Switch between complete Horizon OC Battery and Performance profiles directly from Ultrahand.
+Switch between a Horizon OC performance profile and a stock-clock undervolting Battery profile from Ultrahand.
 
 **Detailed description**  
-Performance Modes is an Ultrahand package for Horizon OC that lets you keep two complete setups: Performance and Battery.
+Performance Modes is an Ultrahand package for Horizon OC that lets you keep two complete setups: a normal high-performance OC profile and a separate stock-clock undervolting profile for battery life.
 
-Performance Mode can keep your normal high-clock OC settings. Battery Mode is intended for stock handheld clocks, where VDD2, VDDQ and CPU High UV can be tuned for lower power use. On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 at the same stock game clocks (+9.9%).
+Performance Mode keeps the voltage, memory and clock headroom needed for higher overclocks. Battery Mode is designed around Nintendo stock handheld clocks, so VDD2, VDDQ, CPU High UV and the required GPU voltage points can be tuned specifically for those lower operating points.
 
-The package switches the full Horizon OC config, hoc.kip and all per-game Horizon clock profiles. Battery app profiles can be reset to stock/default clocks from the menu. ReverseNX-RT per-title settings are also handled when installed.
+This can reduce power consumption without reducing game performance below stock clocks. On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 using the same stock game clocks (+9.9%).
+
+The package switches the complete Horizon OC config and hoc.kip. All per-game Horizon clock profiles therefore switch with the mode as well. Battery app profiles can be reset to stock/default clocks from the menu, and optional ReverseNX-RT per-title settings are handled when installed.
 
 When changing mode, the current profile is saved, the other profile is loaded and CFW reboots. This reboot is intentional and required to load the selected hoc.kip.
 
-Requires Ultrahand and Horizon OC. Voltage/UV settings are console-specific and must be stability-tested by the user.
+Requires Ultrahand and Horizon OC. Undervolting limits are console-specific and must be stability-tested by the user.
 
 **Changelog**  
 Initial release:
@@ -61,6 +63,9 @@ Initial release:
 **Icon**  
 `assets/icon.png`
 
+**Screenshot**  
+`assets/screenshot-main.jpg`
+
 ## Notes for the reviewer
 
 Performance Modes is an **Ultrahand package**, not a standalone `.nro` application. The install ZIP places the package under:
@@ -76,7 +81,7 @@ Required existing software:
 
 ReverseNX-RT support is optional.
 
-The project does not ship personal overclock/undervolt profiles. Users create and stability-test their own Battery and Performance settings.
+The project does not ship fixed overclock/undervolt values. Users create and stability-test their own Performance and Battery settings.
 
 ## Final checklist before submitting
 
@@ -87,6 +92,7 @@ The project does not ship personal overclock/undervolt profiles. Users create an
 - Installable SD-root ZIP: ready
 - Banner: ready
 - Icon: ready
+- Screenshot: ready
 - Changelog: ready
 - Contact field: user must enter e-mail or Discord handle
 - GitHub release: recommended before submission so future releases can be detected automatically by HBAS
