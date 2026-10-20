@@ -23,7 +23,7 @@ See the [Battery tuning guide](docs/BATTERY_TUNING.md) for a practical walkthrou
 
 ### Example battery-life result
 
-In the development OLED, Red Dead Redemption was tested at the **same stock game clocks/settings** with the two different Horizon OC voltage profiles:
+In the development OLED, Red Dead Redemption was tested at the **same stock game clocks/settings** with the two different Horizon OC voltage profiles. Both runs used **50% display brightness** and **0% volume**:
 
 | Setting | Performance profile | Battery profile |
 | --- | ---: | ---: |
