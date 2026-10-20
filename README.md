@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="assets/hbas-banner.jpg" alt="Performance Modes banner" width="100%">
+  <img src="https://raw.githubusercontent.com/retrotendo/Ultrahand-Performance-Modes/main/assets/hbas-banner.jpg" alt="Performance Modes banner" width="100%">
 </p>
 
 # Performance Modes
 
 **Performance Modes** is an Ultrahand package for Nintendo Switch that switches between a complete **Performance** setup and a separate **Battery** setup for [Horizon OC](https://github.com/Horizon-OC/Horizon-OC).
 
-The intended concept is simple: keep your normal high-clock OC setup in **Performance Mode**, and use **Battery Mode as a stock-clock undervolting / efficiency profile**. The package stores the whole Horizon OC configuration together with the active `hoc.kip`. Per-title Horizon clock profiles are included automatically. If ReverseNX-RT is installed, its per-title `.dat` settings are stored and restored with the mode as well.
+The intended concept is simple: keep your normal high-clock OC setup in **Performance Mode**, and use **Battery Mode as a stock-clock undervolting / efficiency profile**. The package stores the whole Horizon OC configuration together with the active `hoc.kip`. Per-title Horizon clock profiles are included automatically. If ReverseNX-RT is installed, its complete `ReverseNX-RT` settings folder is stored and restored with the mode as well.
 
 <p align="center">
-  <img src="assets/screenshot-main.jpg" alt="Performance Modes running in Ultrahand" width="100%">
+  <img src="https://raw.githubusercontent.com/retrotendo/Ultrahand-Performance-Modes/main/assets/screenshot-main.jpg" alt="Performance Modes running in Ultrahand" width="100%">
 </p>
 
 ## Why Performance + Battery profiles?
@@ -48,7 +48,7 @@ This is only one console and one workload, not a guaranteed result. The actual b
 - Stores the complete `/config/horizon-oc/config.ini` per mode.
 - Stores `/atmosphere/kips/hoc.kip` per mode.
 - Automatically includes all current and future Horizon OC title-ID app profiles because the full config file is saved.
-- Optional **ReverseNX-RT** per-title state/resolution settings are silently saved with each mode.
+- Optional **ReverseNX-RT** settings are silently saved/restored by copying the complete `/SaltySD/plugins/ReverseNX-RT` folder with each mode.
 - **Reset Battery App Profiles -> STOCK** removes standard per-title CPU/GPU/RAM overrides from the stored Battery config while preserving Horizon OC's global `[values]` settings.
 - Manual **Safety Backup / Restore**.
 - Safety state: if the package cannot confirm whether Battery or Performance is active, it does **not** overwrite either stored profile.
@@ -67,7 +67,7 @@ The reboot after changing mode is intentional and required: the active `hoc.kip`
 
 ## Installation
 
-1. Download `Performance-Modes-v1.0.zip` from the `dist` folder (or a GitHub release when available).
+1. Download `Performance-Modes-v1.0.zip` from the `dist` folder or from the GitHub `v1.0` release.
 2. Extract it to the **root of the SD card**.
 3. Confirm this path exists:
    ```text
@@ -111,7 +111,7 @@ For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
 
 After setup, normal operation is intentionally simple:
 
-- **Battery Mode**: saves the current Performance files, restores Battery files, restores optional ReverseNX-RT per-title settings, sets the state to Battery and reboots.
+- **Battery Mode**: saves the current Performance files and ReverseNX-RT folder, restores Battery files and ReverseNX-RT folder, sets the state to Battery and reboots.
 - **Performance Mode**: does the reverse.
 
 You normally do **not** need to manually save after changing Horizon OC settings. The outgoing mode is automatically saved when you switch modes.
@@ -134,7 +134,7 @@ That removes the standard per-title clock override keys from the stored Battery 
 Battery/
 ├── config.ini          # full Horizon OC config, including title-ID app profiles
 ├── hoc.kip             # Horizon OC KIP configuration
-└── ReverseNX-RT/       # optional per-title *.dat settings
+└── ReverseNX-RT/       # optional complete ReverseNX-RT settings folder
 
 Performance/
 ├── config.ini
@@ -147,10 +147,10 @@ The active source files are:
 ```text
 /config/horizon-oc/config.ini
 /atmosphere/kips/hoc.kip
-/SaltySD/plugins/ReverseNX-RT/*.dat   # optional
+/SaltySD/plugins/ReverseNX-RT/        # optional
 ```
 
-ReverseNX-RT stores its per-title saves as `%TITLEID%.dat` files under `/SaltySD/plugins/ReverseNX-RT/`; Performance Modes only touches those `.dat` files and does not replace ReverseNX-RT itself.
+Performance Modes copies the complete ReverseNX-RT settings folder; it does not replace the ReverseNX-RT application itself.
 
 ## Safety behavior
 
@@ -163,7 +163,7 @@ The package state is stored locally as either `BATTERY`, `PERFORMANCE` or `UNSET
 
 ## Safety Backup
 
-**Create Safety Backup** stores the current active Horizon config/KIP, both stored modes, optional ReverseNX-RT snapshots, and the package state under the package's `Backup/` directory.
+**Create Safety Backup** stores the current active Horizon config/KIP, both stored modes, the complete optional ReverseNX-RT snapshots, and the package state under the package's `Backup/` directory.
 
 **Restore Safety Backup** writes that snapshot back and reboots CFW.
 
