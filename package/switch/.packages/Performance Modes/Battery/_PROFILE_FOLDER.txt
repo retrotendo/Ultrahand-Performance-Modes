@@ -1,0 +1,3 @@
+Battery profile files:
+config.ini  = App Profile
+hoc.kip     = Horizon Profile
