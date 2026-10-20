@@ -38,7 +38,7 @@ Performance Modes is an Ultrahand package for Horizon OC that lets you keep two 
 
 Performance Mode keeps the voltage, memory and clock headroom needed for higher overclocks. Battery Mode is designed around Nintendo stock handheld clocks, so VDD2, VDDQ, CPU High UV and the required GPU voltage points can be tuned specifically for those lower operating points.
 
-This can reduce power consumption without reducing game performance below stock clocks. On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 using the same stock game clocks (+9.9%).
+This can reduce power consumption without reducing game performance below stock clocks. On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 using the same stock game clocks (+9.9%). Both runs used 50% display brightness and 0% volume.
 
 The package switches the complete Horizon OC config and hoc.kip. All per-game Horizon clock profiles therefore switch with the mode as well. Battery app profiles can be reset to stock/default clocks from the menu, and the complete optional ReverseNX-RT settings folder is saved and restored with each mode when present.
 
