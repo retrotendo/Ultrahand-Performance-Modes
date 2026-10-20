@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/retrotendo/Ultrahand-Performance-Modes/main/assets/hbas-banner.jpg" alt="Performance Modes banner" width="100%">
-</p>
+![Performance Modes banner](assets/hbas-banner.jpg)
 
 # Performance Modes
 
@@ -8,9 +6,7 @@
 
 The intended concept is simple: keep your normal high-clock OC setup in **Performance Mode**, and use **Battery Mode as a stock-clock undervolting / efficiency profile**. The package stores the whole Horizon OC configuration together with the active `hoc.kip`. Per-title Horizon clock profiles are included automatically. If ReverseNX-RT is installed, its complete `ReverseNX-RT` settings folder is stored and restored with the mode as well.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/retrotendo/Ultrahand-Performance-Modes/main/assets/screenshot-main.jpg" alt="Performance Modes running in Ultrahand" width="100%">
-</p>
+![Performance Modes running in Ultrahand](assets/screenshot-main.jpg)
 
 ## Why Performance + Battery profiles?
 
