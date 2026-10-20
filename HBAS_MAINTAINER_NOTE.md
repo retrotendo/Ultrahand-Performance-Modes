@@ -10,7 +10,7 @@ It switches between two complete Horizon OC setups: a normal high-performance OC
 
 The package switches the full Horizon OC configuration and `hoc.kip`, including per-game Horizon clock profiles, and automatically saves the profile being left before loading the other one. Battery per-game clock overrides can also be reset to stock/default from the package menu.
 
-On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 at the same stock game clocks (+9.9%) after tuning the Battery voltage profile. This is only an example; the project does not ship fixed OC/UV values and users must stability-test their own settings.
+On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 at the same stock game clocks (+9.9%) after tuning the Battery voltage profile. Both runs used 50% display brightness and 0% volume. This is only an example; the project does not ship fixed OC/UV values and users must stability-test their own settings.
 
 This is **not a standalone `.nro`**. It is an Ultrahand package installed under:
 
