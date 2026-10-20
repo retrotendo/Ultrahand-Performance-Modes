@@ -17,6 +17,6 @@ Extract `Performance-Modes-v1.0.zip` to the root of the SD card.
 - Structured Ultrahand menu with Change Profile, Save Settings, Initial Setup and Backup Files sections
 
 ## Why two profiles?
-A Performance profile can retain the voltage and memory headroom required for high clocks, while a Battery profile can be tuned only for the lower/stock clocks actually used there. On the development OLED, Red Dead Redemption at identical stock game clocks improved from 5 h 32 min to 6 h 05 min (+33 min / ~9.9% runtime) with the tuned Battery profile. Results vary by hardware and settings.
+A Performance profile can retain the voltage and memory headroom required for high clocks, while a Battery profile can be tuned only for the lower/stock clocks actually used there. On the development OLED, Red Dead Redemption at identical stock game clocks improved from 5 h 32 min to 6 h 05 min (+33 min / ~9.9% runtime) with the tuned Battery profile. Both runs used 50% display brightness and 0% volume. Results vary by hardware and settings.
 
 SHA256: `f65dff885987e9d952d0a57eeb50d2779caaf9c2a767145e2051f9bc2ae2c44c`
