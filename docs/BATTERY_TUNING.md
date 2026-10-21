@@ -2,7 +2,7 @@
 
 The point of Battery Mode is **not** to create a second maximum-overclock profile. The biggest opportunity is usually the opposite: keep Battery Mode inside the stock frequency range, then tune only the voltage headroom required for those lower clocks.
 
-A normal maximum-performance OC profile is often built around the highest CPU/RAM clocks the console can stably reach. That can require substantially more VDD2/VDDQ and CPU voltage headroom than stock-frequency gaming needs. Performance Modes lets you keep that high-performance setup untouched while building a second, efficiency-focused profile.
+A normal maximum-performance OC profile is often built around the highest CPU/RAM clocks the console can stably reach. That can require substantially more VDD2/VDDQ and CPU voltage headroom than stock-frequency gaming needs. Performance Modes lets you keep that high-performance setup untouched in **OC Mode** while building a second, efficiency-focused Battery profile.
 
 > [!WARNING]
 > There is no universal safe minimum voltage or universal UV level. Every CPU, GPU and RAM setup is different. A setting that works on one Switch can crash or corrupt data on another. Change one area at a time, test it, and keep a known-good profile / Safety Backup.
@@ -42,9 +42,9 @@ The procedure below is a reproducible way to tune one area at a time: isolate on
 
 Before reducing anything:
 
-1. Create/confirm a working **Performance Mode**.
+1. Create/confirm a working **OC Mode**.
 2. Create the Battery profile slot.
-3. If Battery should have no per-game OC profiles, use `Reset Battery App Profiles -> STOCK` while Performance is the confirmed current mode.
+3. If Battery should have no per-game OC profiles, use `Reset Battery App Profiles -> STOCK` while **OC Mode** is the confirmed current mode.
 4. Switch to Battery Mode.
 5. Start with voltages / UV values that are already known stable.
 6. Use Temporary Overrides only for the part being tested: CPU **1785**, RAM **1600**, or GPU **384 MHz**.
@@ -74,7 +74,7 @@ The final Battery profile stored:
 
 - **VDD2: 912.5 mV** (`common_emc_mem_volt=912500`)
 
-The Performance profile used **1087.5 mV**. These are example results from one OLED/Mariko console, not recommended universal values.
+The **OC Mode profile** used **1087.5 mV**. These are example results from one OLED/Mariko console, not recommended universal values.
 
 ---
 
@@ -95,7 +95,7 @@ The final Battery profile stored:
 
 - **VDDQ: 400 mV** (`mariko_emc_vddq_volt=400000`)
 
-The Performance profile used **600 mV**.
+The **OC Mode profile** used **600 mV**.
 
 After both RAM voltages have been tuned separately, run **Memtester for at least another 30–60 minutes with both final values active together**. The combined setting matters more than either value in isolation.
 
@@ -103,7 +103,7 @@ After both RAM voltages have been tuned separately, run **Memtester for at least
 
 ## 4. Tune CPU High UV at stock boost
 
-CPU High UV should be treated as a **profile-specific stability setting**. A Performance profile that must support very high CPU clocks can need more voltage than a Battery profile that only needs stock boost.
+CPU High UV should be treated as a **profile-specific stability setting**. An **OC Mode** profile that must support very high CPU clocks can need more voltage than a Battery profile that only needs stock boost.
 
 For Battery Mode:
 
@@ -183,15 +183,17 @@ A 30-minute synthetic test is a useful screening test, not absolute proof of lon
 
 The project was developed on a Mariko/OLED system with these RAM-voltage profile values:
 
-| Setting | Performance profile | Battery profile |
+| Setting | OC Mode profile | Battery Mode profile |
 | --- | ---: | ---: |
 | VDD2 | 1087.5 mV | ~912.5 mV |
 | VDDQ | 600 mV | 400 mV |
 
 With **Red Dead Redemption using the same stock game clocks/settings**, measured runtime was:
 
-- Performance voltage profile: **5 h 32 min**
-- Battery voltage profile: **6 h 05 min**
+- OC Mode voltage profile: **5 h 32 min**
+- Battery Mode voltage profile: **6 h 05 min**
+
+Both runs used **50% display brightness** and **0% volume**.
 
 That is **+33 minutes / +9.9% runtime**, equivalent to roughly **9.0% lower average whole-device power draw** for that specific test.
 
@@ -199,14 +201,18 @@ This result is an example, not a guarantee. Battery condition, screen brightness
 
 ## App profiles
 
-Horizon OC stores per-title CPU/GPU/RAM profiles inside the same `config.ini` that Performance Modes saves. Therefore game profiles are automatically switched together with Battery/Performance Mode.
+Horizon OC stores per-title CPU/GPU/RAM profiles inside the same `config.ini` that Performance Modes saves. Therefore game profiles are automatically switched together with **Battery Mode / OC Mode**.
 
 If Battery Mode should use stock/default per-game clocks, run:
 
 `Setup -> Reset Battery App Profiles -> STOCK`
 
-This removes the stored per-title clock override keys from Battery Mode while keeping its global Horizon OC settings, including the Battery voltage configuration.
+This action only runs while **OC Mode is active**. If Battery Mode is active, nothing is changed and the package tells you to switch to OC Mode first.
 
 ## Reboot behavior
 
-Every Battery/Performance mode change ends with a CFW reboot **on purpose**. The active `hoc.kip` is replaced during the switch, and the reboot is necessary for that KIP profile to be loaded for the next boot.
+Every **Battery Mode / OC Mode** change ends with a CFW reboot **on purpose**. The active `hoc.kip` is replaced during the switch, and the reboot is necessary for that KIP profile to be loaded for the next boot.
+
+## Internal compatibility names
+
+The visible profile is called **OC Mode**, while the internal state remains `PERFORMANCE` and its storage folder remains `Performance/`. These internal names are intentionally retained so existing profiles remain compatible.
