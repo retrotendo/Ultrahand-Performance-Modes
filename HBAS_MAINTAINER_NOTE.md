@@ -10,7 +10,7 @@ It switches between two complete Horizon OC setups: **OC Mode**, which keeps the
 
 The package switches the full Horizon OC configuration and `hoc.kip`, including per-game Horizon clock profiles, and automatically saves the profile being left before loading the other one. Battery per-game clock overrides can also be reset to stock/default from the package menu.
 
-On the development OLED, Red Dead Redemption runtime increased from 5:32 to 6:05 at the same stock game clocks (+9.9%) after tuning the Battery voltage profile. Both runs used 50% display brightness and 0% volume. This is only an example; the project does not ship fixed OC/UV values and users must stability-test their own settings.
+On the development OLED, Red Dead Redemption at the same stock game clocks/settings, 50% display brightness and 0% volume ran **4:56 on a stock no-OC/no-UV profile**, **5:32 on the OC Mode voltage profile**, and **6:05 on the tuned Battery Mode profile**. This is only an example; the project does not ship fixed OC/UV values and users must stability-test their own settings.
 
 This is **not a standalone `.nro`**. It is an Ultrahand package installed under:
 
@@ -18,7 +18,7 @@ This is **not a standalone `.nro`**. It is an Ultrahand package installed under:
 
 Requirements are Ultrahand Overlay and Horizon OC. ReverseNX-RT integration is optional.
 
-For compatibility with existing test builds, the visible **OC Mode** still uses the internal state value `PERFORMANCE` and the internal folder `Performance/`.
+OC Mode files are stored under `OCMode/`. The tested internal state value remains `PERFORMANCE`.
 
 Repository, source, installation ZIP, documentation, license and artwork are available here:
 
