@@ -56,7 +56,7 @@ CHECK FILES
 -----------
 Check Files verifies Battery config.ini + hoc.kip and OC Mode config.ini +
 hoc.kip. If all four exist, it reports:
-  All 4 core profile files: OK
+  All 4 files: OK
 
 SAFETY BACKUP
 -------------
@@ -66,5 +66,6 @@ reboots CFW.
 
 INTERNAL STATE
 --------------
-The package state remains BATTERY / PERFORMANCE. PERFORMANCE is only the
-internal state value used for OC Mode; the actual storage folder is ./OCMode/.
+The package state is BATTERY / OC Mode. The state value is displayed directly
+as the active profile. Older PERFORMANCE state values are migrated to OC Mode
+on package boot; the storage folder remains ./OCMode/.
