@@ -51,7 +51,7 @@ This is one console and one workload, not a guaranteed result. Actual benefit de
 - **Reset Battery App Profiles -> STOCK** resets Battery per-title clock overrides while preserving Battery's global Horizon OC `[values]` settings.
 - Manual **Safety Backup / Restore**.
 - Safety state: if the package cannot confirm whether Battery Mode or OC Mode is active, it does **not** overwrite either stored profile.
-- **Check Files** verifies the four core files and reports `All 4 core profile files: OK` when all are present.
+- **Check Files** verifies the four core files and reports `All 4 files: OK` when all are present.
 
 The reboot after changing mode is intentional and required: the active `hoc.kip` is replaced during the switch, and CFW must restart so the selected KIP/profile is actually loaded.
 
@@ -125,7 +125,7 @@ For the first setup, **start by booting the normal OC configuration you want to 
 9. After the Battery settings are stable, use **Save Settings -> as Battery Mode** as a checkpoint.
 10. Choose **OC Mode**. The OC profile is restored and CFW reboots.
 11. If you want Battery games to use stock/default app clocks, open **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
-12. Open **Setup -> Check Files**. When all four core files are present, it reports `All 4 core profile files: OK`.
+12. Open **Setup -> Check Files**. When all four core files are present, it reports `All 4 files: OK`.
 13. Optionally choose **Create Safety Backup** once both modes are known-good.
 
 For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
@@ -134,8 +134,8 @@ For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
 
 After setup, normal operation is intentionally simple:
 
-- **Battery Mode**: saves the current OC Mode files and ReverseNX-RT folder, restores Battery files and ReverseNX-RT folder, sets the state to Battery and reboots.
-- **OC Mode**: saves the current Battery files and ReverseNX-RT folder, restores the OC Mode files and ReverseNX-RT folder, sets the internal state to `PERFORMANCE` and reboots.
+- **Battery Mode**: saves the current OC Mode files and ReverseNX-RT folder, restores Battery files and ReverseNX-RT folder, sets the state to `BATTERY` and reboots.
+- **OC Mode**: saves the current Battery files and ReverseNX-RT folder, restores the OC Mode files and ReverseNX-RT folder, sets the state to `OC Mode` and reboots.
 
 You normally do **not** need to manually save after changing Horizon OC settings. The outgoing mode is automatically saved when you switch modes.
 
@@ -177,12 +177,12 @@ Performance Modes copies the complete ReverseNX-RT settings folder; it does not 
 
 ## Internal state
 
-For compatibility with the tested switching logic, the package state remains:
+The package state values are:
 
 - Battery Mode: `BATTERY`
-- OC Mode: `PERFORMANCE`
+- OC Mode: `OC Mode`
 
-The **storage folder is now `OCMode/`**, so the on-disk profile names match the visible menu terminology.
+Older installs that still contain `PERFORMANCE` are migrated automatically to `OC Mode` when the package boots. The OC profile files are stored under `OCMode/`.
 
 ## Safety behavior
 
