@@ -16,10 +16,24 @@ Extract `Performance-Modes-v1.0.zip` to the root of the SD card.
 - Unknown-state overwrite protection
 - Structured Ultrahand menu with Change Profile, Save Settings, Initial Setup and Backup Files sections
 - `Check Files` gives a clear `All 4 core profile files: OK` confirmation when both Battery Mode and OC Mode config/KIP files are present
+- OC Mode profile files are stored under `OCMode/` for clearer on-disk naming
+- Recovery guidance for overly aggressive UV settings using a Hekate `CFW no OC` / safe entry when available
 
-## Why two profiles?
-OC Mode can retain the voltage and memory headroom required for high clocks, while Battery Mode can be tuned only for the lower/stock clocks actually used there. On the development OLED, Red Dead Redemption at identical stock game clocks improved from 5 h 32 min to 6 h 05 min (+33 min / ~9.9% runtime) with the tuned Battery profile. Both runs used 50% display brightness and 0% volume. Results vary by hardware and settings.
+## Battery-life example
+On the development OLED, Red Dead Redemption used the same stock game clocks/settings, **50% display brightness** and **0% volume**:
 
-The visible profile name is **OC Mode**. For compatibility, its internal state remains `PERFORMANCE` and its internal storage folder remains `Performance/`.
+| Setting | Stock — no OC/UV profile | OC Mode profile | Battery Mode profile |
+| --- | ---: | ---: | ---: |
+| VDD2 | 1175 mV | 1087.5 mV | ~912.5 mV |
+| VDDQ | 600 mV | 600 mV | 400 mV |
+| Runtime | 4 h 56 min | 5 h 32 min | 6 h 05 min |
 
-SHA256: `a654d0c1b97c4959a37c71f1ffb994408546b3472cd231062b8648812b1dc3b6`
+Battery Mode vs OC Mode: **+33 min / +9.9% runtime**, about **9.0% lower average whole-device power draw**.
+
+Battery Mode vs stock: **+69 min / +23.3% runtime**, about **18.9% lower average whole-device power draw**.
+
+Results vary by hardware and settings.
+
+The visible profile name is **OC Mode**. Its internal state value remains `PERFORMANCE`; its storage folder is `OCMode/`.
+
+SHA256: `f164f84f5d9fe13e8cc5d2570c353bad3973c4cea9ef84d5bcedc045667d8450`
