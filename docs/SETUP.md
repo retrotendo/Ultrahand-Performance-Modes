@@ -10,17 +10,17 @@ Main
 
   Change Profile
     Battery Mode
-    Performance Mode
+    OC Mode
 
   Save Settings
     as Battery Mode
-    as Performance Mode
+    as OC Mode
 
 Setup
   Initial Setup
     Reset Battery App Profiles -> STOCK
     Mark Current Boot -> Battery
-    Mark Current Boot -> Performance
+    Mark Current Boot -> OC Mode
     Check Files
 
   Backup Files
@@ -28,10 +28,10 @@ Setup
     Restore Safety Backup
 ```
 
-## Recommended first setup from Performance
+## Recommended first setup from OC Mode
 
-1. `Mark Current Boot -> Performance`
-2. `Save Settings -> as Performance Mode`
+1. `Mark Current Boot -> OC Mode`
+2. `Save Settings -> as OC Mode`
 3. `Save Settings -> as Battery Mode` (temporary clone)
 4. Choose `Battery Mode` and allow the reboot.
 5. While Battery is now the confirmed current profile, prepare the Battery baseline before doing any undervolt tuning:
@@ -43,8 +43,8 @@ Setup
 7. Keep GPU behavior stock for the Battery profile. For stock handheld validation, the highest relevant GPU point is **384 MHz**; no GPU overclock is needed for this profile.
 8. Once the stock-frequency limits are in place, tune **VDD2**, **VDDQ** and **CPU High UV** one area at a time. Use the [Battery tuning guide](BATTERY_TUNING.md) for the stress-test order and stability checks.
 9. After the Battery settings are stable, use `Save Settings -> as Battery Mode` as an explicit first-setup checkpoint.
-10. Choose `Performance Mode` and allow the reboot. Performance is restored.
-11. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while Performance is active.
+10. Choose `OC Mode` and allow the reboot. The OC profile is restored.
+11. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while OC Mode is active.
 12. Run `Setup -> Check Files`. All four core profile files should report `OK`.
 13. Optional: `Create Safety Backup` once both profiles are known-good.
 
@@ -71,4 +71,6 @@ You normally do not need to press a manual Save entry before every profile switc
 
 ## If Current Profile is unknown
 
-Do not use a mode switch until you know what was actually booted. Choose the matching `Mark Current Boot` entry first. The switch commands deliberately refuse to overwrite a stored mode unless the state is exactly `BATTERY` or `PERFORMANCE`.
+Do not use a mode switch until you know what was actually booted. Choose the matching `Mark Current Boot` entry first. The switch commands deliberately refuse to overwrite a stored mode unless the internal state is exactly `BATTERY` or `PERFORMANCE`.
+
+`PERFORMANCE` is the internal compatibility state used for the visible **OC Mode**. The internal profile folder also remains `Performance/` so existing setups continue to work.
