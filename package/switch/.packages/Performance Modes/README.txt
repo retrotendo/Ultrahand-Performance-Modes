@@ -1,12 +1,70 @@
-Performance Modes v1.0
+PERFORMANCE MODES v1.0
+======================
 
-Open Ultrahand -> Packages -> Performance Modes.
+Performance Modes switches between two Horizon OC setups:
+- Battery Mode: stock-clock undervolting / efficiency profile
+- OC Mode: normal overclock / performance profile
 
-Read the full setup and usage guide at:
-https://github.com/retrotendo/Ultrahand-Performance-Modes
+MENU LAYOUT
+-----------
+MAIN
+  Current Profile
 
-Required: Ultrahand Overlay + Horizon OC.
-Optional: ReverseNX-RT.
+  Change Profile
+    Battery Mode
+    OC Mode
 
-This package does not choose safe overclock/undervolt values for you.
-Only use settings you have tested on your own console.
+  Save Settings
+    as Battery Mode
+    as OC Mode
+
+SETUP
+  Initial Setup
+    Reset Battery App Profiles -> STOCK
+    Mark Current Boot -> Battery
+    Mark Current Boot -> OC Mode
+    Check Files
+
+  Backup Files
+    Create Safety Backup
+    Restore Safety Backup
+
+PROFILE STORAGE
+---------------
+Battery Mode is stored internally under ./Battery/.
+OC Mode is stored internally under ./Performance/.
+
+Each mode stores:
+  config.ini          = full Horizon OC config, including title-ID app profiles
+  hoc.kip             = Horizon OC KIP configuration
+  ReverseNX-RT/       = optional complete ReverseNX-RT settings folder
+
+AUTO-SAVE ON MODE SWITCH
+------------------------
+When leaving OC Mode, the current Horizon config, hoc.kip and ReverseNX-RT
+folder are saved to the internal Performance folder before Battery Mode is
+loaded. When leaving Battery Mode, the reverse happens. CFW then reboots so
+the selected hoc.kip becomes active.
+
+RESET BATTERY APP PROFILES
+--------------------------
+Reset Battery App Profiles -> STOCK only runs while OC Mode is active.
+If Battery Mode is active, nothing is changed and a notification tells you to
+switch to OC Mode first.
+
+CHECK FILES
+-----------
+Check Files verifies Battery config.ini + hoc.kip and OC Mode config.ini +
+hoc.kip. If all four exist, it reports:
+  All 4 core profile files: OK
+
+SAFETY BACKUP
+-------------
+Create Safety Backup stores the active files plus both stored modes, including
+ReverseNX-RT snapshots when present. Restore Safety Backup restores them and
+reboots CFW.
+
+INTERNAL COMPATIBILITY
+----------------------
+The internal state remains BATTERY / PERFORMANCE and the OC Mode folder remains
+./Performance/. These names are intentionally retained for compatibility.
