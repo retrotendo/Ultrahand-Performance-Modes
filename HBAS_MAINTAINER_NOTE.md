@@ -18,7 +18,7 @@ This is **not a standalone `.nro`**. It is an Ultrahand package installed under:
 
 Requirements are Ultrahand Overlay and Horizon OC. ReverseNX-RT integration is optional.
 
-OC Mode files are stored under `OCMode/`. The tested internal state value remains `PERFORMANCE`.
+OC Mode files are stored under `OCMode/`, and the active state marker is `OC Mode`. Older `PERFORMANCE` state values are migrated automatically when the package boots.
 
 Repository, source, installation ZIP, documentation, license and artwork are available here:
 
