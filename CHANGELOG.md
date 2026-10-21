@@ -12,7 +12,8 @@
 - Battery app-profile reset to stock/default clocks.
 - Manual Safety Backup and Restore, including ReverseNX-RT snapshots for active/Battery/OC Mode states.
 - Exact-state protection prevents automatic profile overwrite when state is unknown or unset.
-- `Check Files` reports `All 4 core profile files: OK` when both profile configs and KIPs are present.
-- OC Mode profile storage renamed to `OCMode/` for consistency with the visible menu name.
+- `Check Files` reports `All 4 files: OK` when both profile configs and KIPs are present.
+- OC Mode profile storage uses `OCMode/` for consistency with the visible menu name.
+- OC Mode now also uses `OC Mode` as the package state marker; legacy `PERFORMANCE` state values are migrated automatically at package boot.
 - Documentation includes a true stock no-OC/no-UV battery baseline plus OC Mode and Battery Mode results.
 - Added Hekate `CFW no OC` / safe-boot recovery guidance for overly aggressive UV settings.
