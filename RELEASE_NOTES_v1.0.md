@@ -36,4 +36,4 @@ Results vary by hardware and settings.
 
 The visible profile name is **OC Mode**. Its internal state value remains `PERFORMANCE`; its storage folder is `OCMode/`.
 
-SHA256: `f164f84f5d9fe13e8cc5d2570c353bad3973c4cea9ef84d5bcedc045667d8450`
+SHA256: `4e2aa0c0e225cff655511822f471787938728da6e468bffa4a46f9f62eea469a`
