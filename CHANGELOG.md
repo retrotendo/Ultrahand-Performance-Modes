@@ -12,6 +12,7 @@
 - Battery app-profile reset to stock/default clocks.
 - Manual Safety Backup and Restore, including ReverseNX-RT snapshots for active/Battery/OC Mode states.
 - Exact-state protection prevents automatic profile overwrite when state is unknown or unset.
-- Structured Ultrahand menu with Change Profile, Save Settings, Initial Setup and Backup Files sections.
-- Public documentation includes the dual-profile efficiency rationale and measured Red Dead Redemption battery-life example.
-- Visible OC Mode naming keeps the internal `PERFORMANCE` state and `Performance/` folder for compatibility.
+- `Check Files` reports `All 4 core profile files: OK` when both profile configs and KIPs are present.
+- OC Mode profile storage renamed to `OCMode/` for consistency with the visible menu name.
+- Documentation includes a true stock no-OC/no-UV battery baseline plus OC Mode and Battery Mode results.
+- Added Hekate `CFW no OC` / safe-boot recovery guidance for overly aggressive UV settings.
