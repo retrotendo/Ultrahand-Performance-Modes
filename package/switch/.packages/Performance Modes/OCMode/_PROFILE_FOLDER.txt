@@ -1,0 +1,4 @@
+OC Mode profile files:
+config.ini  = App Profile
+hoc.kip     = Horizon Profile
+ReverseNX-RT/ = optional ReverseNX-RT settings folder
