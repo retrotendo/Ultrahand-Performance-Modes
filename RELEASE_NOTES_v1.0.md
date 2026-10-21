@@ -37,4 +37,4 @@ Results vary by hardware and settings.
 
 The active state values are `BATTERY` and `OC Mode`, and OC Mode files are stored under `OCMode/`.
 
-SHA256: `da0cbdb2af2a1ceedba3572a9f132162b25753aa56b50cdc4e1ca18cae09f956`
+SHA256: `20c3ddae84e48df607bf7bd91d6e2a6fdde47b86385539cd3023b36a0590f6b9`
