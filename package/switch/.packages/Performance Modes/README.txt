@@ -31,8 +31,8 @@ SETUP
 
 PROFILE STORAGE
 ---------------
-Battery Mode is stored internally under ./Battery/.
-OC Mode is stored internally under ./Performance/.
+Battery Mode is stored under ./Battery/.
+OC Mode is stored under ./OCMode/.
 
 Each mode stores:
   config.ini          = full Horizon OC config, including title-ID app profiles
@@ -42,9 +42,9 @@ Each mode stores:
 AUTO-SAVE ON MODE SWITCH
 ------------------------
 When leaving OC Mode, the current Horizon config, hoc.kip and ReverseNX-RT
-folder are saved to the internal Performance folder before Battery Mode is
-loaded. When leaving Battery Mode, the reverse happens. CFW then reboots so
-the selected hoc.kip becomes active.
+folder are saved to ./OCMode/ before Battery Mode is loaded. When leaving
+Battery Mode, the reverse happens. CFW then reboots so the selected hoc.kip
+becomes active.
 
 RESET BATTERY APP PROFILES
 --------------------------
@@ -64,7 +64,7 @@ Create Safety Backup stores the active files plus both stored modes, including
 ReverseNX-RT snapshots when present. Restore Safety Backup restores them and
 reboots CFW.
 
-INTERNAL COMPATIBILITY
-----------------------
-The internal state remains BATTERY / PERFORMANCE and the OC Mode folder remains
-./Performance/. These names are intentionally retained for compatibility.
+INTERNAL STATE
+--------------
+The package state remains BATTERY / PERFORMANCE. PERFORMANCE is only the
+internal state value used for OC Mode; the actual storage folder is ./OCMode/.
