@@ -138,4 +138,4 @@ This action only runs while **OC Mode is active**. If Battery Mode is active, no
 Battery Mode is stored under `Battery/`.  
 OC Mode is stored under `OCMode/`.
 
-The tested internal state value for OC Mode remains `PERFORMANCE`; this is only an internal state marker and is not the profile folder name.
+The internal state values are `BATTERY` and `OC Mode`. Older `PERFORMANCE` state values are migrated automatically to `OC Mode` when the package boots.
