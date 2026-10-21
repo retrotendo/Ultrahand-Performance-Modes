@@ -47,7 +47,7 @@ Start by booting the normal OC configuration that you want to keep as **OC Mode*
 8. After the Battery settings are stable, use `Save Settings -> as Battery Mode` as an explicit checkpoint.
 9. Choose `OC Mode` and allow the reboot. The OC profile is restored.
 10. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while **OC Mode is active**.
-11. Run `Setup -> Check Files`. When all four core files are present, it reports `All 4 core profile files: OK`.
+11. Run `Setup -> Check Files`. When all four core files are present, it reports `All 4 files: OK`.
 12. Optional: `Create Safety Backup` once both profiles are known-good.
 
 ## Recommended Battery baseline
@@ -82,6 +82,6 @@ You normally do not need to press a manual Save entry before every profile switc
 
 ## If Current Profile is unknown
 
-Do not use a mode switch until you know what was actually booted. Choose the matching `Mark Current Boot` entry first. The switch commands deliberately refuse to overwrite a stored mode unless the internal state is exactly `BATTERY` or `PERFORMANCE`.
+Do not use a mode switch until you know what was actually booted. Choose the matching `Mark Current Boot` entry first. The switch commands deliberately refuse to overwrite a stored mode unless the internal state is exactly `BATTERY` or `OC Mode`.
 
-`PERFORMANCE` is only the internal state value used for the visible **OC Mode**. OC Mode files are stored under `OCMode/`.
+Older `PERFORMANCE` state values are migrated automatically to `OC Mode` when the package boots. OC Mode files are stored under `OCMode/`.
