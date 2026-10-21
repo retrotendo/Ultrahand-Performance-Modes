@@ -21,7 +21,7 @@ MAIN
 SETUP
   Initial Setup
     Reset Battery App Profiles -> STOCK
-    Mark Current Boot -> Battery
+    Mark Current Boot -> Battery Mode
     Mark Current Boot -> OC Mode
     Check Files
 
@@ -66,6 +66,8 @@ reboots CFW.
 
 INTERNAL STATE
 --------------
-The package state is BATTERY / OC Mode. The state value is displayed directly
-as the active profile. Older PERFORMANCE state values are migrated to OC Mode
-on package boot; the storage folder remains ./OCMode/.
+The package uses the visible mode names directly as state values:
+  Battery Mode
+  OC Mode
+
+The active state is displayed directly at the top of the menu.
