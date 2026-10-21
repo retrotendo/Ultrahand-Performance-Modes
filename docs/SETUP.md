@@ -19,7 +19,7 @@ Main
 Setup
   Initial Setup
     Reset Battery App Profiles -> STOCK
-    Mark Current Boot -> Battery
+    Mark Current Boot -> Battery Mode
     Mark Current Boot -> OC Mode
     Check Files
 
@@ -82,6 +82,6 @@ You normally do not need to press a manual Save entry before every profile switc
 
 ## If Current Profile is unknown
 
-Do not use a mode switch until you know what was actually booted. Choose the matching `Mark Current Boot` entry first. The switch commands deliberately refuse to overwrite a stored mode unless the internal state is exactly `BATTERY` or `OC Mode`.
+Do not use a mode switch until you know what was actually booted. Choose the matching `Mark Current Boot` entry first. The switch commands deliberately refuse to overwrite a stored mode unless the internal state is exactly `Battery Mode` or `OC Mode`.
 
-Older `PERFORMANCE` state values are migrated automatically to `OC Mode` when the package boots. OC Mode files are stored under `OCMode/`.
+Battery Mode files are stored under `Battery/`; OC Mode files are stored under `OCMode/`.
