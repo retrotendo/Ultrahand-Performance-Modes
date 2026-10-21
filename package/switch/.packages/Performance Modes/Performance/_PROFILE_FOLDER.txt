@@ -1,3 +1,0 @@
-OC Mode profile files (stored internally in Performance/):
-config.ini  = App Profile
-hoc.kip     = Horizon Profile
