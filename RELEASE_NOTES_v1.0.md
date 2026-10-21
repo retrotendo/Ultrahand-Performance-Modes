@@ -15,8 +15,9 @@ Extract `Performance-Modes-v1.0.zip` to the root of the SD card.
 - Safety Backup / Restore including active, Battery Mode and OC Mode ReverseNX-RT snapshots
 - Unknown-state overwrite protection
 - Structured Ultrahand menu with Change Profile, Save Settings, Initial Setup and Backup Files sections
-- `Check Files` gives a clear `All 4 core profile files: OK` confirmation when both Battery Mode and OC Mode config/KIP files are present
+- `Check Files` gives a clear `All 4 files: OK` confirmation when both Battery Mode and OC Mode config/KIP files are present
 - OC Mode profile files are stored under `OCMode/` for clearer on-disk naming
+- OC Mode uses `OC Mode` as the package state marker; older `PERFORMANCE` values are migrated automatically at package boot
 - Recovery guidance for overly aggressive UV settings using a Hekate `CFW no OC` / safe entry when available
 
 ## Battery-life example
@@ -34,6 +35,6 @@ Battery Mode vs stock: **+69 min / +23.3% runtime**, about **18.9% lower average
 
 Results vary by hardware and settings.
 
-The visible profile name is **OC Mode**. Its internal state value remains `PERFORMANCE`; its storage folder is `OCMode/`.
+The active state values are `BATTERY` and `OC Mode`, and OC Mode files are stored under `OCMode/`.
 
-SHA256: `4e2aa0c0e225cff655511822f471787938728da6e468bffa4a46f9f62eea469a`
+SHA256: `da0cbdb2af2a1ceedba3572a9f132162b25753aa56b50cdc4e1ca18cae09f956`
