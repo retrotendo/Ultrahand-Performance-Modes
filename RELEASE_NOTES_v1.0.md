@@ -22,4 +22,4 @@ OC Mode can retain the voltage and memory headroom required for high clocks, whi
 
 The visible profile name is **OC Mode**. For compatibility, its internal state remains `PERFORMANCE` and its internal storage folder remains `Performance/`.
 
-SHA256: `TO_BE_UPDATED_AFTER_FINAL_ZIP`
+SHA256: `a654d0c1b97c4959a37c71f1ffb994408546b3472cd231062b8648812b1dc3b6`
