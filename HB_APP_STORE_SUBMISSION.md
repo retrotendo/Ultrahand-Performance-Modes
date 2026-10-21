@@ -80,7 +80,7 @@ ReverseNX-RT support is optional.
 
 The project does not ship fixed overclock/undervolt values. Users create and stability-test their own OC Mode and Battery Mode settings.
 
-The visible OC Mode profile is stored under `OCMode/`. The tested switch state value remains internally `PERFORMANCE`.
+OC Mode is stored under `OCMode/`, and its package state marker is `OC Mode`. Older `PERFORMANCE` state values are migrated automatically when the package boots.
 
 ## Final checklist before submitting
 
