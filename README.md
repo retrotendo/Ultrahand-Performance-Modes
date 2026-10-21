@@ -26,15 +26,17 @@ See the [Battery tuning guide](docs/BATTERY_TUNING.md) for a practical walkthrou
 
 ### Example battery-life result
 
-On the development OLED, Red Dead Redemption was tested at the **same stock game clocks/settings** using the two different Horizon OC voltage profiles. Both runs used **50% display brightness** and **0% volume**:
+On the development OLED, Red Dead Redemption was tested at the **same stock game clocks/settings** with **50% display brightness** and **0% volume**:
 
-| Setting | OC Mode profile | Battery Mode profile |
-| --- | ---: | ---: |
-| VDD2 | 1087.5 mV | ~912.5 mV |
-| VDDQ | 600 mV | 400 mV |
-| Runtime | 5 h 32 min | 6 h 05 min |
+| Setting | Stock — no OC/UV profile | OC Mode profile | Battery Mode profile |
+| --- | ---: | ---: | ---: |
+| VDD2 | 1175 mV | 1087.5 mV | ~912.5 mV |
+| VDDQ | 600 mV | 600 mV | 400 mV |
+| Runtime | 4 h 56 min | 5 h 32 min | 6 h 05 min |
 
-That is **33 minutes longer**, or about **+9.9% runtime**. For the same usable battery energy, that corresponds to roughly **9.0% lower average whole-device power draw** during that test.
+Compared with **OC Mode**, Battery Mode ran **33 minutes longer**, or about **+9.9% runtime**. For the same usable battery energy, that corresponds to roughly **9.0% lower average whole-device power draw** during that test.
+
+Compared with the **true stock baseline**, Battery Mode ran **69 minutes longer**, or about **+23.3% runtime**, corresponding to roughly **18.9% lower average whole-device power draw**. Even the OC Mode voltage profile ran **36 minutes / +12.2% longer than stock**, corresponding to roughly **10.8% lower average whole-device power draw** at the same game clocks/settings.
 
 This is one console and one workload, not a guaranteed result. Actual benefit depends on silicon quality, RAM, voltages, game workload, display brightness, battery condition and the settings used in both profiles.
 
@@ -62,6 +64,8 @@ The reboot after changing mode is intentional and required: the active `hoc.kip`
 
 > [!WARNING]
 > Performance Modes does not validate overclock or undervolt values. Horizon OC settings can cause instability and, if misused, may risk data corruption. Use settings that are stable on your own console and keep appropriate backups.
+>
+> If a voltage/UV setting is too aggressive and normal CFW no longer boots, use your **Hekate `CFW no OC` / safe boot entry** (if your setup provides one), correct the value in Horizon OC or HOC Toolkit, save/apply it, then reboot into normal CFW. Performance Modes does not create or modify that Hekate entry.
 
 ## Installation
 
@@ -103,31 +107,26 @@ Setup
 
 ## First-time setup
 
-The safest setup is to create both profile slots first, switch into the temporary Battery slot, prepare the stock-clock Battery baseline, tune it, then return to OC Mode.
+For the first setup, **start by booting the normal OC configuration you want to keep as OC Mode**. Save that profile first; only then create and tune Battery Mode.
 
-### If OC Mode is currently booted
-
-1. Open **Setup** and choose **Mark Current Boot -> OC Mode**.
-2. On **Main**, choose **Save Settings -> as OC Mode**.
-3. Without changing anything yet, choose **Save Settings -> as Battery Mode**. This creates a temporary Battery clone so the first switch is safe.
-4. Choose **Battery Mode**. The console saves OC Mode, loads the temporary Battery clone and reboots.
-5. Prepare the Battery baseline:
+1. Boot your normal OC configuration.
+2. Open **Setup** and choose **Mark Current Boot -> OC Mode**.
+3. On **Main**, choose **Save Settings -> as OC Mode**.
+4. Without changing anything yet, choose **Save Settings -> as Battery Mode**. This creates a temporary Battery clone so the first switch is safe.
+5. Choose **Battery Mode**. The console saves OC Mode, loads the temporary Battery clone and reboots.
+6. Prepare the Battery baseline:
    - In **Horizon OC**, turn **Uncapped Clocks OFF**.
    - Set **RAM Max Clock = 1600 MHz**.
    - Keep GPU behavior at stock handheld clocks; **384 MHz** is the highest relevant stock handheld GPU point.
    - Do not keep per-game CPU/GPU/RAM OC overrides in Battery Mode if the goal is a true stock-clock efficiency profile.
    - In **HOC Toolkit**, set **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz**.
-6. Horizon OC itself may not offer 1785 MHz in those two maximum-clock selectors. Set both values in **HOC Toolkit**, save/apply the HOC configuration, and reboot CFW so the updated `hoc.kip` is loaded.
-7. Tune **VDD2**, **VDDQ**, **CPU High UV** and the required stock GPU voltage points one area at a time. See the [Battery tuning guide](docs/BATTERY_TUNING.md).
-8. After the Battery settings are stable, use **Save Settings -> as Battery Mode** as a checkpoint.
-9. Choose **OC Mode**. The OC profile is restored and CFW reboots.
-10. If you want Battery games to use stock/default app clocks, open **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
-11. Open **Setup -> Check Files**. When all four core files are present, it reports `All 4 core profile files: OK`.
-12. Optionally choose **Create Safety Backup** once both modes are known-good.
-
-### If Battery Mode is currently booted
-
-Use the same procedure in reverse: mark Battery, save Battery, create a temporary OC Mode clone, switch to OC Mode, configure/save it, then return to Battery Mode as needed.
+7. Horizon OC itself may not offer 1785 MHz in those two maximum-clock selectors. Set both values in **HOC Toolkit**, save/apply the HOC configuration, and reboot CFW so the updated `hoc.kip` is loaded.
+8. Tune **VDD2**, **VDDQ**, **CPU High UV** and the required stock GPU voltage points one area at a time. See the [Battery tuning guide](docs/BATTERY_TUNING.md).
+9. After the Battery settings are stable, use **Save Settings -> as Battery Mode** as a checkpoint.
+10. Choose **OC Mode**. The OC profile is restored and CFW reboots.
+11. If you want Battery games to use stock/default app clocks, open **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
+12. Open **Setup -> Check Files**. When all four core files are present, it reports `All 4 core profile files: OK`.
+13. Optionally choose **Create Safety Backup** once both modes are known-good.
 
 For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
 
@@ -136,7 +135,7 @@ For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
 After setup, normal operation is intentionally simple:
 
 - **Battery Mode**: saves the current OC Mode files and ReverseNX-RT folder, restores Battery files and ReverseNX-RT folder, sets the state to Battery and reboots.
-- **OC Mode**: saves the current Battery files and ReverseNX-RT folder, restores the OC files and ReverseNX-RT folder, sets the internal state to Performance and reboots.
+- **OC Mode**: saves the current Battery files and ReverseNX-RT folder, restores the OC Mode files and ReverseNX-RT folder, sets the internal state to `PERFORMANCE` and reboots.
 
 You normally do **not** need to manually save after changing Horizon OC settings. The outgoing mode is automatically saved when you switch modes.
 
@@ -160,7 +159,7 @@ Battery/
 ├── hoc.kip             # Horizon OC KIP configuration
 └── ReverseNX-RT/       # optional complete ReverseNX-RT settings folder
 
-Performance/            # internal folder used for OC Mode
+OCMode/
 ├── config.ini
 ├── hoc.kip
 └── ReverseNX-RT/
@@ -176,20 +175,16 @@ The active source files are:
 
 Performance Modes copies the complete ReverseNX-RT settings folder; it does not replace the ReverseNX-RT application itself.
 
-## Internal compatibility names
+## Internal state
 
-The user-facing profile is called **OC Mode**, but two internal names intentionally remain unchanged for compatibility with existing builds:
+For compatibility with the tested switching logic, the package state remains:
 
-- State value: `PERFORMANCE`
-- Storage folder: `Performance/`
+- Battery Mode: `BATTERY`
+- OC Mode: `PERFORMANCE`
 
-Battery Mode continues to use `BATTERY` and `Battery/` internally.
-
-These internal names are implementation details and do not change the visible menu terminology.
+The **storage folder is now `OCMode/`**, so the on-disk profile names match the visible menu terminology.
 
 ## Safety behavior
-
-The package state is stored internally as either `BATTERY`, `PERFORMANCE` or `UNSET`.
 
 - An automatic profile save only occurs when the current state is an exact confirmed match.
 - `UNSET`, a missing value, or an unexpected value never overwrites Battery Mode or OC Mode during a mode switch.
@@ -206,7 +201,7 @@ The backup is replaced only when you explicitly run **Create Safety Backup**.
 
 ## Updating
 
-Future updates should be extracted over the existing package folder unless release notes say otherwise. User-generated `Battery/`, `Performance/`, `Backup/` and `config.ini` files are not included in release ZIPs and therefore are not intentionally replaced by the project package.
+Future updates should be extracted over the existing package folder unless release notes say otherwise. User-generated `Battery/`, `OCMode/`, `Backup/` and `config.ini` files are not included in release ZIPs and therefore are not intentionally replaced by the project package.
 
 ## Credits
 
