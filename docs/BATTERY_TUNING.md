@@ -58,13 +58,11 @@ Start from:
 
 | ✅ YES | ❌ NO |
 | --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase Low UV by **1 level**.<br><br>Example: **Low UV1 -> Low UV2**.<br><br>Save KIP -> reboot -> set **1020 / 384 / 1331** again -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce Low UV by **1 level**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>The previous UV level is now your candidate. |
+| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase Low UV by **1 level**.<br><br>Example: **Low UV1 -> Low UV2**.<br><br>Save KIP -> reboot -> set **1020 / 384 / 1331** again -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, reduce Low UV by **1 level**, Save KIP and reboot. That previous level is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce Low UV by **1 level**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>The previous UV level is now your candidate. |
 
-### When the first FAIL is found
+### Confirm the candidate
 
-Reduce Low UV by **1 level**.
-
-Reboot and set Overrides:
+Set Overrides:
 
 **1020 / 384 / 1331**
 
@@ -72,7 +70,7 @@ Run:
 
 **Matrixprod -> 1 hour**
 
-If the 1-hour test fails, reduce Low UV by another **1 level** and repeat the 1-hour test.
+If the 1-hour test fails, reduce Low UV by another **1 level**, Save KIP, reboot and repeat the 1-hour test.
 
 Keep the **highest Low UV level that passes the full hour**.
 
@@ -98,11 +96,11 @@ RAM voltages remain stock:
 
 | ✅ YES | ❌ NO |
 | --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **Matrixprod -> 1 minute**.<br><br>If it **PASSes**, lower Low VMIN to the next lower available value.<br><br>Save KIP -> reboot -> set Overrides again -> test 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Restore the **previous Low VMIN value**.<br>5. Save KIP.<br>6. Reboot normally. |
+| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **Matrixprod -> 1 minute**.<br><br>If it **PASSes**, lower Low VMIN to the next lower available value.<br><br>Save KIP -> reboot -> set Overrides again -> test 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, restore the **previous Low VMIN value**, Save KIP and reboot. That previous value is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Restore the **previous Low VMIN value**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>The restored value is your candidate. |
 
-### Check low CPU clocks
+### Confirm the candidate at low CPU clocks
 
-With the lowest booting Low VMIN, test:
+With the candidate Low VMIN, test:
 
 - **510 MHz**
 - **612 MHz**
@@ -153,13 +151,11 @@ Save KIP and reboot.
 
 | ✅ YES | ❌ NO |
 | --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDDQ by another **10 mV**.<br><br>Example: **590 -> 580 -> 570 -> 560 mV**.<br><br>After every change: Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDDQ by **10 mV**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>Example: **410 mV does not boot -> restore 420 mV**. |
+| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDDQ by another **10 mV**.<br><br>Example: **590 -> 580 -> 570 -> 560 mV**.<br><br>After every change: Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, increase VDDQ by **10 mV**, Save KIP and reboot. That previous value is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDDQ by **10 mV**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>Example: **410 mV does not boot -> restore 420 mV**.<br><br>The restored value is your candidate. |
 
-### When the first FAIL is found
+### Confirm the candidate
 
-Increase VDDQ by **10 mV**.
-
-Reboot and set Overrides:
+Set Overrides:
 
 **1785 / 76.8 / 1600**
 
@@ -167,7 +163,7 @@ Run:
 
 **MemTester -> 1 hour**
 
-If the 1-hour test fails, increase VDDQ by another **10 mV** and repeat the 1-hour test.
+If the 1-hour test fails, increase VDDQ by another **10 mV**, Save KIP, reboot and repeat the 1-hour test.
 
 Keep the **lowest VDDQ that passes the full hour**.
 
@@ -195,13 +191,11 @@ Save KIP and reboot.
 
 | ✅ YES | ❌ NO |
 | --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDD2 by another **12.5 mV**.<br><br>Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL.<br><br>Horizon OC may display half-step values rounded, e.g. **937.5 -> 937 mV** and **912.5 -> 912 mV**. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDD2 by **12.5 mV**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>Example: **900 mV does not boot -> restore 912.5 mV**. |
+| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDD2 by another **12.5 mV**.<br><br>Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, increase VDD2 by **12.5 mV**, Save KIP and reboot. That previous value is your candidate.<br><br>Horizon OC may display half-step values rounded, e.g. **937.5 -> 937 mV** and **912.5 -> 912 mV**. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDD2 by **12.5 mV**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>Example: **900 mV does not boot -> restore 912.5 mV**.<br><br>The restored value is your candidate. |
 
-### When the first FAIL is found
+### Confirm the candidate
 
-Increase VDD2 by **12.5 mV**.
-
-Reboot and set Overrides:
+Set Overrides:
 
 **1785 / 76.8 / 1600**
 
@@ -209,7 +203,7 @@ Run:
 
 **MemTester -> 1 hour**
 
-If the 1-hour test fails, increase VDD2 by another **12.5 mV** and repeat the 1-hour test.
+If the 1-hour test fails, increase VDD2 by another **12.5 mV**, Save KIP, reboot and repeat the 1-hour test.
 
 Keep the **lowest VDD2 that passes the full hour**.
 
@@ -301,13 +295,11 @@ Save KIP and reboot.
 
 | ✅ YES | ❌ NO |
 | --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase High UV by **1 level**.<br><br>Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce High UV by **1 level**.<br>5. Save KIP.<br>6. Reboot normally. |
+| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase High UV by **1 level**.<br><br>Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, reduce High UV by **1 level**, Save KIP and reboot. That previous level is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce High UV by **1 level**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>The previous High UV level is now your candidate. |
 
-### When the first FAIL is found
+### Confirm the candidate
 
-Reduce High UV by **1 level**.
-
-Reboot and set Overrides:
+Set Overrides:
 
 **1785 / 76.8 / 1600**
 
@@ -315,7 +307,7 @@ Run:
 
 **Matrixprod -> 1 hour**
 
-If the 1-hour test fails, reduce High UV by another **1 level** and repeat the 1-hour test.
+If the 1-hour test fails, reduce High UV by another **1 level**, Save KIP, reboot and repeat the 1-hour test.
 
 Keep the **highest High UV level that passes the full hour**.
 
