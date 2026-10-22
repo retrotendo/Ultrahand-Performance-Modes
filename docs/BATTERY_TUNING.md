@@ -56,38 +56,9 @@ Start from:
 
 ### Does the Switch boot?
 
-#### YES
-
-Open Horizon OC and set Overrides:
-
-- CPU: **1020 MHz**
-- GPU: **384 MHz**
-- RAM: **1331 MHz**
-
-Run:
-
-**StressNX -> Matrixprod -> 1 minute**
-
-If it **PASSes**, increase Low UV by **1 level**.
-
-Example:
-
-**Low UV1 -> Low UV2**
-
-Save KIP -> reboot -> set **1020 / 384 / 1331** again -> Matrixprod for 1 minute.
-
-Repeat until the first FAIL.
-
-#### NO – Switch does not boot
-
-1. Boot Hekate.
-2. Start **CFW without Horizon OC / hoc.kip**.
-3. Open Horizon OC.
-4. Reduce Low UV by **1 level**.
-5. Save KIP.
-6. Reboot normally.
-
-The previous UV level is now your candidate.
+| ✅ YES | ❌ NO |
+| --- | --- |
+| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase Low UV by **1 level**.<br><br>Example: **Low UV1 -> Low UV2**.<br><br>Save KIP -> reboot -> set **1020 / 384 / 1331** again -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce Low UV by **1 level**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>The previous UV level is now your candidate. |
 
 ### When the first FAIL is found
 
@@ -125,32 +96,9 @@ RAM voltages remain stock:
 
 ### Does the Switch boot?
 
-#### YES
-
-Open Horizon OC and set Overrides:
-
-- CPU: **1020 MHz**
-- GPU: **384 MHz**
-- RAM: **1331 MHz**
-
-Run:
-
-**Matrixprod -> 1 minute**
-
-If it **PASSes**, lower Low VMIN to the next lower available value.
-
-Save KIP -> reboot -> set Overrides again -> test 1 minute.
-
-Repeat until the first FAIL.
-
-#### NO – Switch does not boot
-
-1. Boot Hekate.
-2. Start **CFW without Horizon OC / hoc.kip**.
-3. Open Horizon OC.
-4. Restore the **previous Low VMIN value**.
-5. Save KIP.
-6. Reboot normally.
+| ✅ YES | ❌ NO |
+| --- | --- |
+| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **Matrixprod -> 1 minute**.<br><br>If it **PASSes**, lower Low VMIN to the next lower available value.<br><br>Save KIP -> reboot -> set Overrides again -> test 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Restore the **previous Low VMIN value**.<br>5. Save KIP.<br>6. Reboot normally. |
 
 ### Check low CPU clocks
 
@@ -203,42 +151,9 @@ Save KIP and reboot.
 
 ### Does the Switch boot?
 
-#### YES
-
-Open Horizon OC and set Overrides:
-
-- CPU: **1785 MHz**
-- GPU: **76.8 MHz**
-- RAM: **1600 MHz**
-
-Run:
-
-**Benchmark Toolbox -> MemTester -> 1 minute**
-
-If it **PASSes**, lower VDDQ by another **10 mV**.
-
-Example:
-
-**590 -> 580 -> 570 -> 560 mV**
-
-After every change:
-
-Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.
-
-Repeat until the first FAIL.
-
-#### NO – Switch does not boot
-
-1. Boot Hekate.
-2. Start **CFW without Horizon OC / hoc.kip**.
-3. Open Horizon OC.
-4. Increase VDDQ by **10 mV**.
-5. Save KIP.
-6. Reboot normally.
-
-Example:
-
-**410 mV does not boot -> restore 420 mV**
+| ✅ YES | ❌ NO |
+| --- | --- |
+| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDDQ by another **10 mV**.<br><br>Example: **590 -> 580 -> 570 -> 560 mV**.<br><br>After every change: Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDDQ by **10 mV**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>Example: **410 mV does not boot -> restore 420 mV**. |
 
 ### When the first FAIL is found
 
@@ -278,43 +193,9 @@ Save KIP and reboot.
 
 ### Does the Switch boot?
 
-#### YES
-
-Open Horizon OC and set Overrides:
-
-- CPU: **1785 MHz**
-- GPU: **76.8 MHz**
-- RAM: **1600 MHz**
-
-Run:
-
-**Benchmark Toolbox -> MemTester -> 1 minute**
-
-If it **PASSes**, lower VDD2 by another **12.5 mV**.
-
-Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.
-
-Repeat until the first FAIL.
-
-Horizon OC may display some half-step values rounded.
-
-Examples:
-
-- 937.5 mV may display as **937 mV**
-- 912.5 mV may display as **912 mV**
-
-#### NO – Switch does not boot
-
-1. Boot Hekate.
-2. Start **CFW without Horizon OC / hoc.kip**.
-3. Open Horizon OC.
-4. Increase VDD2 by **12.5 mV**.
-5. Save KIP.
-6. Reboot normally.
-
-Example:
-
-**900 mV does not boot -> restore 912.5 mV**
+| ✅ YES | ❌ NO |
+| --- | --- |
+| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDD2 by another **12.5 mV**.<br><br>Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL.<br><br>Horizon OC may display half-step values rounded, e.g. **937.5 -> 937 mV** and **912.5 -> 912 mV**. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDD2 by **12.5 mV**.<br>5. Save KIP.<br>6. Reboot normally.<br><br>Example: **900 mV does not boot -> restore 912.5 mV**. |
 
 ### When the first FAIL is found
 
@@ -418,32 +299,9 @@ Save KIP and reboot.
 
 ### Does the Switch boot?
 
-#### YES
-
-Open Horizon OC and set Overrides:
-
-- CPU: **1785 MHz**
-- GPU: **76.8 MHz**
-- RAM: **1600 MHz**
-
-Run:
-
-**StressNX -> Matrixprod -> 1 minute**
-
-If it **PASSes**, increase High UV by **1 level**.
-
-Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> Matrixprod for 1 minute.
-
-Repeat until the first FAIL.
-
-#### NO – Switch does not boot
-
-1. Boot Hekate.
-2. Start **CFW without Horizon OC / hoc.kip**.
-3. Open Horizon OC.
-4. Reduce High UV by **1 level**.
-5. Save KIP.
-6. Reboot normally.
+| ✅ YES | ❌ NO |
+| --- | --- |
+| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase High UV by **1 level**.<br><br>Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce High UV by **1 level**.<br>5. Save KIP.<br>6. Reboot normally. |
 
 ### When the first FAIL is found
 
