@@ -28,40 +28,62 @@ Setup
     Restore Safety Backup
 ```
 
+## Before you start
+
+Performance Modes assumes that you already have a **known-good, stability-tested OC profile** for your console. The package is a profile switcher, not an automatic OC tuner.
+
+Your existing OC setup should already contain the CPU/GPU/RAM limits, voltage curves and other Horizon OC / HOC Toolkit values that you know are stable on your hardware. Save that setup as **OC Mode** first. Battery Mode is then derived from this known-good profile and simplified for stock handheld operation.
+
+For Battery Mode, the main efficiency controls are usually:
+
+- **RAM VDD2**
+- **RAM VDDQ**
+- **CPU Low UV** for normal stock-frequency handheld CPU operation
+
+Other values can normally stay at the known-good settings inherited from OC Mode unless you have a specific reason to change them. If you keep a higher CPU boost limit such as 1785 MHz, the corresponding higher-frequency CPU UV settings still need to remain stable, but they do not need to be the main Battery Mode tuning target.
+
 ## Recommended first setup
 
-Start by booting the normal OC configuration that you want to keep as **OC Mode**. Save OC Mode first, then create Battery Mode from it.
+Start by booting the normal OC configuration that you already know is stable and want to keep as **OC Mode**.
 
-1. `Mark Current Boot -> OC Mode`
-2. `Save Settings -> as OC Mode`
-3. `Save Settings -> as Battery Mode` to create a temporary Battery clone.
-4. Choose `Battery Mode` and allow the reboot.
-5. Prepare the Battery baseline:
-   - In **Horizon OC**, turn **Uncapped Clocks OFF**.
+1. Boot your known-good OC configuration.
+2. Open **Setup** and choose `Mark Current Boot -> OC Mode`.
+3. On **Main**, choose `Save Settings -> as OC Mode`.
+4. Without changing anything yet, choose `Save Settings -> as Battery Mode`. This creates a safe temporary Battery clone from the known-good OC profile.
+5. Choose `Battery Mode`. Performance Modes saves OC Mode, loads the temporary Battery clone and **automatically reboots CFW**.
+6. Prepare a conservative Battery baseline before undervolting:
+   - In **Horizon OC -> Safety Settings**, turn **Uncapped Clocks OFF**.
+   - In **RAM Settings**, set **HP Mode OFF**.
    - Set **RAM Max Clock = 1600 MHz**.
-   - Keep GPU behavior at stock handheld clocks; **384 MHz** is the highest relevant stock handheld GPU point.
-   - Do not keep per-game CPU/GPU/RAM OC overrides in Battery Mode if the goal is a true stock-clock efficiency profile.
-   - In **HOC Toolkit**, set **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz**.
-6. Horizon OC itself may not offer **1785 MHz** in the Max Clock / Max Boost selectors. Set those two limits in **HOC Toolkit**, save/apply the HOC configuration, then reboot CFW so the new `hoc.kip` is active.
-7. Tune **VDD2**, **VDDQ**, **CPU High UV** and the required stock GPU voltage points one area at a time. Use the [Battery tuning guide](BATTERY_TUNING.md) for the stress-test order and stability checks.
-8. After the Battery settings are stable, use `Save Settings -> as Battery Mode` as an explicit checkpoint.
-9. Choose `OC Mode` and allow the reboot. The OC profile is restored.
-10. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while **OC Mode is active**.
-11. Run `Setup -> Check Files`. When all four core files are present, it reports `All 4 files: OK`.
-12. Optional: `Create Safety Backup` once both profiles are known-good.
+   - Start **VDD2** and **VDDQ** from safe stock/default values for your setup before lowering them. On the development OLED, the stock baseline used for comparison was **VDD2 1175 mV / VDDQ 600 mV**.
+   - Keep GPU behavior at stock handheld clocks. There is normally no need to retune the full GPU curve just to create Battery Mode if your existing curve is already known-good at those clocks.
+   - Use stock/default per-game CPU/GPU/RAM clocks if the goal is a true stock-clock efficiency profile.
+   - Keep the rest of the Horizon OC / HOC Toolkit configuration at known-good values inherited from OC Mode unless there is a specific reason to change it.
+7. If desired, keep **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz** through HOC Toolkit. Those limits allow the normal boost step while stock game profiles remain at stock clocks. Save/apply the HOC configuration and reboot CFW if the KIP changes.
+8. Tune the Battery-specific efficiency controls one at a time:
+   - lower **VDD2** and stability-test it;
+   - then lower **VDDQ** and stability-test the final VDD2/VDDQ pair;
+   - then tune **CPU Low UV** for the stock-frequency CPU range.
+9. After the Battery settings are stable, use `Save Settings -> as Battery Mode` as an explicit checkpoint.
+10. Choose `OC Mode`. Performance Modes restores the OC profile and **automatically reboots CFW**.
+11. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while **OC Mode is active**.
+12. Run `Setup -> Check Files`. When all four core files are present, it reports `All 4 files: OK`.
+13. Optional: `Create Safety Backup` once both profiles are known-good.
 
 ## Recommended Battery baseline
 
-| Setting | Battery target |
+| Setting | Starting target |
 | --- | ---: |
-| CPU Max Clock | **1785 MHz** via HOC Toolkit |
-| CPU Boost Clock | **1785 MHz** via HOC Toolkit |
-| RAM Max Clock | **1600 MHz** |
-| GPU | **stock handheld behavior, up to 384 MHz** |
 | Uncapped Clocks | **OFF** |
+| RAM HP Mode | **OFF** |
+| RAM Max Clock | **1600 MHz** |
+| VDD2 | **safe stock/default starting value** |
+| VDDQ | **safe stock/default starting value** |
+| CPU tuning focus | **Low UV at stock-frequency operation** |
+| GPU | **stock handheld behavior** |
 | Per-game Horizon clock overrides | **stock/default** |
 
-These are frequency limits / behavior targets, not universal voltage values. VDD2, VDDQ and CPU High UV must be tuned and stability-tested on the individual console.
+Development-OLED stock comparison baseline: **VDD2 1175 mV / VDDQ 600 mV**. These are not universal minimums; they are conservative starting/reference values from the development console. Final stable values vary by hardware.
 
 ## If an undervolt prevents normal CFW from booting
 
@@ -76,7 +98,7 @@ Performance Modes does not create or modify the Hekate no-OC entry.
 
 ## Everyday workflow
 
-Change Horizon OC, per-game clocks, KIP settings or ReverseNX-RT settings as desired in the current mode. When you switch modes, the current mode is saved automatically before the target mode is restored.
+Change Horizon OC, per-game clocks, KIP settings or ReverseNX-RT settings as desired in the current mode. When you switch modes, the current mode is saved automatically before the target mode is restored, and Performance Modes then automatically reboots CFW so the selected `hoc.kip` becomes active.
 
 You normally do not need to press a manual Save entry before every profile switch. The manual save entries are mainly useful for first setup or when you deliberately want to overwrite one stored profile without switching.
 
