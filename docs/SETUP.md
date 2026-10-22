@@ -49,9 +49,10 @@ Start by booting the normal OC configuration that you already know is stable and
 1. Boot your known-good OC configuration.
 2. Open **Setup** and choose `Mark Current Boot -> OC Mode`.
 3. On **Main**, choose `Save Settings -> as OC Mode`.
-4. Without changing anything yet, choose `Save Settings -> as Battery Mode`. This creates a safe temporary Battery clone from the known-good OC profile.
-5. Choose `Battery Mode`. Performance Modes saves OC Mode, loads the temporary Battery clone and **automatically reboots CFW**.
-6. Prepare a conservative Battery baseline before undervolting:
+4. Open **Setup -> Backup Files** and choose `Create Safety Backup`. Do this **before creating or tuning Battery Mode** so you have a recovery snapshot of the known-good OC configuration, saved OC Mode files and package state.
+5. Without changing anything yet, choose `Save Settings -> as Battery Mode`. This creates a safe temporary Battery clone from the known-good OC profile.
+6. Choose `Battery Mode`. Performance Modes saves OC Mode, loads the temporary Battery clone and **automatically reboots CFW**.
+7. Prepare a conservative Battery baseline before undervolting:
    - In **Horizon OC -> Safety Settings**, turn **Uncapped Clocks OFF**.
    - In **RAM Settings**, set **HP Mode OFF**.
    - Set **RAM Max Clock = 1600 MHz**.
@@ -59,16 +60,16 @@ Start by booting the normal OC configuration that you already know is stable and
    - Keep GPU behavior at stock handheld clocks. There is normally no need to retune the full GPU curve just to create Battery Mode if your existing curve is already known-good at those clocks.
    - Use stock/default per-game CPU/GPU/RAM clocks if the goal is a true stock-clock efficiency profile.
    - Keep the rest of the Horizon OC / HOC Toolkit configuration at known-good values inherited from OC Mode unless there is a specific reason to change it.
-7. If desired, keep **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz** through HOC Toolkit. Those limits allow the normal boost step while stock game profiles remain at stock clocks. Save/apply the HOC configuration and reboot CFW if the KIP changes.
-8. Tune the Battery-specific efficiency controls one at a time:
+8. If desired, keep **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz** through HOC Toolkit. Those limits allow the normal boost step while stock game profiles remain at stock clocks. Save/apply the HOC configuration and reboot CFW if the KIP changes.
+9. Tune the Battery-specific efficiency controls one at a time:
    - lower **VDD2** and stability-test it;
    - then lower **VDDQ** and stability-test the final VDD2/VDDQ pair;
    - then tune **CPU Low UV** for the stock-frequency CPU range.
-9. After the Battery settings are stable, use `Save Settings -> as Battery Mode` as an explicit checkpoint.
-10. Choose `OC Mode`. Performance Modes restores the OC profile and **automatically reboots CFW**.
-11. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while **OC Mode is active**.
-12. Run `Setup -> Check Files`. When all four core files are present, it reports `All 4 files: OK`.
-13. Optional: `Create Safety Backup` once both profiles are known-good.
+10. After the Battery settings are stable, use `Save Settings -> as Battery Mode` as an explicit checkpoint.
+11. Choose `OC Mode`. Performance Modes restores the OC profile and **automatically reboots CFW**.
+12. If you want Battery games to use stock/default app clocks, run `Setup -> Reset Battery App Profiles -> STOCK` while **OC Mode is active**.
+13. Run `Setup -> Check Files`. When all four core files are present, it reports `All 4 files: OK`.
+14. Once both modes are fully tested and known-good, you can optionally run `Create Safety Backup` again to replace the initial OC-only safety snapshot with a complete backup of both finished modes.
 
 ## Recommended Battery baseline
 
