@@ -124,8 +124,6 @@ Keep the initial setup simple. Detailed undervolting belongs in the Battery tuni
 11. Run **Setup -> Check Files**. When all four required files are present, it reports `All 4 files: OK`.
 12. Once both modes are final and known-good, optionally run **Create Safety Backup** again to replace the initial backup with a complete backup of both finished modes.
 
-For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
-
 ## Normal use
 
 After setup, normal operation is intentionally simple:
