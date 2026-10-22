@@ -29,7 +29,7 @@ MIT
 https://github.com/retrotendo/Ultrahand-Performance-Modes
 
 **Short description**  
-Ultrahand profile switcher for Horizon OC with separate OC and battery-focused undervolting modes.
+Ultrahand profile switcher for Horizon OC
 
 **Detailed description**  
 Performance Modes is an Ultrahand package for Horizon OC that switches between two complete setups: OC Mode for your normal overclock/performance profile and Battery Mode for a stock-clock undervolting profile focused on battery life.
