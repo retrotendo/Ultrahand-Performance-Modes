@@ -1,125 +1,568 @@
-# Battery profile tuning — practical quick guide
+# Battery Profile – Simple Step-by-Step Undervolting Guide
 
-Battery Mode is **not** a second maximum-overclock profile. It is intended to keep the console inside Nintendo's stock handheld frequency range while reducing the voltage headroom that is no longer needed for the higher clocks used by OC Mode.
+Battery Mode is intended to keep the console inside Nintendo's stock handheld frequency range while reducing voltage headroom that is only needed for higher OC clocks.
 
-Performance Modes assumes that you already have a **known-good, stability-tested OC profile** for your console. That OC Mode should already contain CPU/GPU/RAM limits, voltage curves and other Horizon OC / HOC Toolkit values that you know are stable on your own hardware.
-
-Battery Mode starts from that known-good profile and simplifies it for stock handheld operation. In practice, the main Battery Mode efficiency controls are usually:
-
-- **RAM VDD2**
-- **RAM VDDQ**
-- **CPU Low UV** for normal stock-frequency handheld CPU operation
-
-Most other values can normally remain at their known-good OC Mode settings unless you have a specific reason to change them. If you retain a higher CPU boost limit such as 1785 MHz, the higher-frequency UV settings still need to remain stable, but they do not need to be the main Battery Mode tuning target.
+Performance Modes assumes that you already have a **known-good, stability-tested OC profile** for your own console. This guide does not build that OC profile. It starts from a known-good setup and shows a simple way to find stable Battery Mode values one setting at a time.
 
 > [!WARNING]
-> There is no universal safe minimum voltage or universal UV level. Every CPU and RAM setup is different. Change one area at a time, test it, and keep a known-good OC Mode / Safety Backup.
+> There is no universal safe minimum voltage or universal UV level. Every CPU and RAM setup is different. A value that works on one Switch can fail on another.
 >
-> If an overly aggressive UV prevents normal CFW from booting, use your **Hekate `CFW no OC` / safe boot entry** if your setup provides one. Correct the value in Horizon OC or HOC Toolkit, save/apply it, then reboot normal CFW. Performance Modes does not create that Hekate entry.
+> Keep a known-good **OC Mode** and a **Safety Backup** before tuning Battery Mode. If an aggressive setting prevents normal CFW from booting, use your **Hekate `CFW no OC` / safe boot entry** if your setup provides one, correct the value, save the KIP, and reboot normally. Performance Modes does not create or modify that Hekate entry.
 
-## Recommended Battery starting point
+## Before you start
 
-Before lowering voltages, first create a conservative stock-behavior baseline:
+Prepare Battery Mode for stock handheld behavior:
 
-| Setting | Starting target |
-| --- | ---: |
-| Uncapped Clocks | **OFF** |
-| RAM HP Mode | **OFF** |
-| RAM Max Clock | **1600 MHz** |
-| VDD2 | **safe stock/default starting value** |
-| VDDQ | **safe stock/default starting value** |
-| CPU tuning focus | **Low UV at stock-frequency operation** |
-| GPU | **stock handheld behavior** |
-| Per-game Horizon clock overrides | **stock/default** |
+- **Safety Settings -> Uncapped Clocks: OFF**
+- **RAM Settings -> HP Mode: OFF**
+- **RAM Max Clock: 1600 MHz**
+- Use stock/default per-game CPU/GPU/RAM clocks
 
-On the development OLED, the stock comparison baseline used **VDD2 1175 mV / VDDQ 600 mV**. These values are useful as conservative reference points for that console, not universal minimums.
+Start the undervolting process from this conservative baseline:
 
-### Optional CPU maximum / boost
+- CPU UV Table: **Normal**
+- Low UV: **0**
+- High UV: **0**
+- VDD2: **1175 mV**
+- VDDQ: **600 mV**
 
-If desired, keep **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz** through HOC Toolkit. Stock game profiles can still remain at stock CPU clocks while the normal boost step remains available.
+This guide treats that stock baseline as the known-safe starting point. There is no need to perform a separate long stock validation before beginning the step-down process.
 
-If the KIP is changed in HOC Toolkit, save/apply it and reboot CFW so the updated `hoc.kip` is actually loaded.
+The basic method is the same throughout the guide:
 
-The higher-frequency UV settings used by boost still need to be stable. However, for Battery Mode efficiency at normal stock handheld game clocks, **CPU Low UV is the main CPU tuning control**.
+**change one step -> Save KIP -> reboot -> set Overrides -> short test -> repeat until first FAIL -> step back once -> long confirmation test**
 
-## Suggested tuning order
+---
 
-### 1. Start from a known-good OC profile
+# 1. Find the Best CPU Low UV
 
-1. Boot and save your already tested **OC Mode**.
-2. Create the Battery profile slot from that known-good setup.
-3. Switch to Battery Mode.
-4. In **Horizon OC -> Safety Settings**, set **Uncapped Clocks OFF**.
-5. In **RAM Settings**, set **HP Mode OFF** and **RAM Max Clock = 1600 MHz**.
-6. Set VDD2/VDDQ to safe stock/default values before beginning the undervolt.
-7. Keep stock/default per-title CPU/GPU/RAM clocks if Battery Mode is intended to be a true stock-clock profile.
+Keep RAM voltages at stock:
 
-Do not lower VDD2, VDDQ and CPU Low UV all at the same time. If a test fails, you need to know which change caused it.
+- VDD2: **1175 mV**
+- VDDQ: **600 mV**
 
-### 2. Tune RAM VDD2 first
+Start from:
 
-Keep **VDDQ at a known-safe value** while finding VDD2.
+- CPU UV Table: **Normal**
+- Low UV: **0**
+- High UV: **0**
 
-1. Keep RAM at **1600 MHz** with HP Mode OFF.
-2. Lower **VDD2** by one available step.
-3. Reboot if required for the value to become active.
-4. Run **Benchmark Toolbox -> RAM -> Memtester**.
-5. Use short passes while approaching the edge, then run a promising candidate for about **30 minutes**.
-6. At the first mismatch, freeze or crash, return to the previous stable step.
+### Start
 
-Development-console Battery value: **~912.5 mV**.  
-Development-console stock baseline: **1175 mV**.  
-Development-console OC Mode value: **1087.5 mV**.
+1. Open Horizon OC.
+2. Change **Low UV 0 -> Low UV 1**.
+3. Save KIP.
+4. Reboot.
 
-### 3. Tune VDDQ second
+### Does the Switch boot?
 
-Keep the stable VDD2 value fixed and tune VDDQ independently.
+#### YES
 
-1. Keep RAM at **1600 MHz** with HP Mode OFF.
-2. Lower VDDQ one available step at a time.
-3. Run Memtester again.
-4. At the first error / mismatch / crash, return to the previous stable step.
-5. After both RAM voltages are chosen, run **30–60 minutes** of Memtester with the final pair active together.
+Open Horizon OC and set Overrides:
 
-Development-console Battery value: **400 mV**.  
-Development-console stock baseline: **600 mV**.
+- CPU: **1020 MHz**
+- GPU: **384 MHz**
+- RAM: **1331 MHz**
 
-### 4. Tune CPU Low UV for stock-frequency operation
+Run:
 
-For Battery Mode, the goal is to optimize the CPU range actually used during normal stock handheld gaming rather than retune the full high-clock CPU curve.
+**StressNX -> Matrixprod -> 1 minute**
 
-1. Keep stock/default game CPU clocks.
-2. Start from a known-stable **CPU Low UV** level.
-3. Increase the Low UV setting one step at a time; a higher UV setting is a more aggressive undervolt.
-4. Reboot when required.
-5. Run CPU stress tests and real games that exercise the normal stock-frequency CPU range.
-6. Any mismatch, freeze, application crash or CFW reboot means the undervolt is too aggressive. Step back.
-7. Once a candidate is found, perform a longer combined validation with the final RAM voltages active as well.
+If it **PASSes**, increase Low UV by **1 level**.
 
-If you retain a 1785 MHz CPU boost limit, leave the higher-frequency UV side at a **known-stable value** from your existing OC profile unless you specifically want to tune it separately. It is not necessary to chase the lowest possible high-frequency voltage just to build an effective Battery Mode.
+Example:
 
-### 5. GPU and other OC settings
+**Low UV1 -> Low UV2**
 
-If your existing OC profile already has stable GPU voltage points and other Horizon OC settings, there is normally no need to retune all of them for Battery Mode.
+Save KIP -> reboot -> set **1020 / 384 / 1331** again -> Matrixprod for 1 minute.
 
-Battery Mode uses stock handheld GPU clocks, so the full high-clock GPU curve is not a primary Battery Mode tuning lever. The same applies to other OC-only parameters that are not used at stock handheld frequencies.
+Repeat until the first FAIL.
 
-Keep these values at known-good settings unless you have a specific reason and a separate stability-testing plan for changing them.
+#### NO – Switch does not boot
 
-### 6. Final combined validation
+1. Boot Hekate.
+2. Start **CFW without Horizon OC / hoc.kip**.
+3. Open Horizon OC.
+4. Reduce Low UV by **1 level**.
+5. Save KIP.
+6. Reboot normally.
 
-Once VDD2, VDDQ and CPU Low UV are individually stable, validate the completed Battery profile with the intended stock handheld limits.
+The previous UV level is now your candidate.
 
-Recommended final checks:
+### When the first FAIL is found
 
-1. **RAM Memtester — at least 30 min; 60 min is better for the final RAM combination**
-2. **CPU stress testing at the stock-frequency range**
-3. Several real games for longer sessions
-4. Repeated mode changes between Battery Mode and OC Mode to verify both stored profiles still load correctly
+Reduce Low UV by **1 level**.
 
-A synthetic pass is useful screening, not absolute proof of long-term stability. Keep some margin if you want dependable daily settings.
+Reboot and set Overrides:
 
-## Development-console battery-life result
+**1020 / 384 / 1331**
+
+Run:
+
+**Matrixprod -> 1 hour**
+
+If the 1-hour test fails, reduce Low UV by another **1 level** and repeat the 1-hour test.
+
+Keep the **highest Low UV level that passes the full hour**.
+
+---
+
+# 2. Find the Lowest Stable Low VMIN
+
+Keep the final Low UV value from Step 1.
+
+RAM voltages remain stock:
+
+- VDD2: **1175 mV**
+- VDDQ: **600 mV**
+
+### Start
+
+1. Open Horizon OC.
+2. Lower Low VMIN to the **next available mV value**.
+3. Save KIP.
+4. Reboot.
+
+### Does the Switch boot?
+
+#### YES
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1020 MHz**
+- GPU: **384 MHz**
+- RAM: **1331 MHz**
+
+Run:
+
+**Matrixprod -> 1 minute**
+
+If it **PASSes**, lower Low VMIN to the next lower available value.
+
+Save KIP -> reboot -> set Overrides again -> test 1 minute.
+
+Repeat until the first FAIL.
+
+#### NO – Switch does not boot
+
+1. Boot Hekate.
+2. Start **CFW without Horizon OC / hoc.kip**.
+3. Open Horizon OC.
+4. Restore the **previous Low VMIN value**.
+5. Save KIP.
+6. Reboot normally.
+
+### Check low CPU clocks
+
+With the lowest booting Low VMIN, test:
+
+- **510 MHz**
+- **612 MHz**
+- **816 MHz**
+- **1020 MHz**
+
+Keep:
+
+- GPU: **384 MHz**
+- RAM: **1331 MHz**
+
+Run Matrixprod briefly at each CPU clock.
+
+If all pass, run Matrixprod for **1 hour** at the low CPU clock that appeared most sensitive during the sweep. If none stands out, use the lowest tested clock as the long confirmation point.
+
+Also check normal system behavior:
+
+- Home Menu
+- Sleep
+- Wake
+- Launch a game
+- Close a game
+
+If anything fails, raise Low VMIN to the **previous mV value** and repeat the checks.
+
+---
+
+# 3. Find the Lowest Stable VDDQ
+
+Keep your final CPU Low UV and Low VMIN.
+
+Start RAM tuning from stock:
+
+- VDD2: **1175 mV**
+- VDDQ: **600 mV**
+
+Only change VDDQ.
+
+### Start
+
+Lower:
+
+**VDDQ 600 -> 590 mV**
+
+Save KIP and reboot.
+
+### Does the Switch boot?
+
+#### YES
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1785 MHz**
+- GPU: **76.8 MHz**
+- RAM: **1600 MHz**
+
+Run:
+
+**Benchmark Toolbox -> MemTester -> 1 minute**
+
+If it **PASSes**, lower VDDQ by another **10 mV**.
+
+Example:
+
+**590 -> 580 -> 570 -> 560 mV**
+
+After every change:
+
+Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.
+
+Repeat until the first FAIL.
+
+#### NO – Switch does not boot
+
+1. Boot Hekate.
+2. Start **CFW without Horizon OC / hoc.kip**.
+3. Open Horizon OC.
+4. Increase VDDQ by **10 mV**.
+5. Save KIP.
+6. Reboot normally.
+
+Example:
+
+**410 mV does not boot -> restore 420 mV**
+
+### When the first FAIL is found
+
+Increase VDDQ by **10 mV**.
+
+Reboot and set Overrides:
+
+**1785 / 76.8 / 1600**
+
+Run:
+
+**MemTester -> 1 hour**
+
+If the 1-hour test fails, increase VDDQ by another **10 mV** and repeat the 1-hour test.
+
+Keep the **lowest VDDQ that passes the full hour**.
+
+---
+
+# 4. Find the Lowest Stable VDD2
+
+Keep your final VDDQ from Step 3.
+
+Start VDD2 from:
+
+**1175 mV**
+
+Only change VDD2.
+
+### Start
+
+Lower VDD2 by:
+
+**12.5 mV**
+
+Save KIP and reboot.
+
+### Does the Switch boot?
+
+#### YES
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1785 MHz**
+- GPU: **76.8 MHz**
+- RAM: **1600 MHz**
+
+Run:
+
+**Benchmark Toolbox -> MemTester -> 1 minute**
+
+If it **PASSes**, lower VDD2 by another **12.5 mV**.
+
+Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.
+
+Repeat until the first FAIL.
+
+Horizon OC may display some half-step values rounded.
+
+Examples:
+
+- 937.5 mV may display as **937 mV**
+- 912.5 mV may display as **912 mV**
+
+#### NO – Switch does not boot
+
+1. Boot Hekate.
+2. Start **CFW without Horizon OC / hoc.kip**.
+3. Open Horizon OC.
+4. Increase VDD2 by **12.5 mV**.
+5. Save KIP.
+6. Reboot normally.
+
+Example:
+
+**900 mV does not boot -> restore 912.5 mV**
+
+### When the first FAIL is found
+
+Increase VDD2 by **12.5 mV**.
+
+Reboot and set Overrides:
+
+**1785 / 76.8 / 1600**
+
+Run:
+
+**MemTester -> 1 hour**
+
+If the 1-hour test fails, increase VDD2 by another **12.5 mV** and repeat the 1-hour test.
+
+Keep the **lowest VDD2 that passes the full hour**.
+
+---
+
+# 5. Confirm Final VDDQ + VDD2 Together
+
+Use your final:
+
+- VDDQ
+- VDD2
+
+Reboot.
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1785 MHz**
+- GPU: **76.8 MHz**
+- RAM: **1600 MHz**
+
+Run:
+
+**MemTester -> 1 hour**
+
+### PASS
+
+Keep both values.
+
+### FAIL
+
+Do not raise both voltages together.
+
+First increase **VDDQ by 10 mV**.
+
+Reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 hour.
+
+Still fails?
+
+Return VDDQ to the previous value.
+
+Then increase **VDD2 by 12.5 mV**.
+
+Reboot and repeat the 1-hour test.
+
+This keeps troubleshooting to one voltage at a time.
+
+---
+
+# 6. Confirm RAM at Normal Handheld Clocks
+
+Reboot.
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1020 MHz**
+- GPU: **384 MHz**
+- RAM: **1331 MHz**
+
+Run:
+
+**Benchmark Toolbox -> MemTester -> 1 hour**
+
+If it PASSes, your final VDDQ/VDD2 pair has now been checked at both stock RAM states used in this guide.
+
+---
+
+# 7. Find the Best CPU High UV
+
+Keep all final values found so far:
+
+- Low UV
+- Low VMIN
+- VDDQ
+- VDD2
+
+Start from:
+
+**High UV 0**
+
+### Start
+
+Change:
+
+**High UV0 -> High UV1**
+
+Save KIP and reboot.
+
+### Does the Switch boot?
+
+#### YES
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1785 MHz**
+- GPU: **76.8 MHz**
+- RAM: **1600 MHz**
+
+Run:
+
+**StressNX -> Matrixprod -> 1 minute**
+
+If it **PASSes**, increase High UV by **1 level**.
+
+Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> Matrixprod for 1 minute.
+
+Repeat until the first FAIL.
+
+#### NO – Switch does not boot
+
+1. Boot Hekate.
+2. Start **CFW without Horizon OC / hoc.kip**.
+3. Open Horizon OC.
+4. Reduce High UV by **1 level**.
+5. Save KIP.
+6. Reboot normally.
+
+### When the first FAIL is found
+
+Reduce High UV by **1 level**.
+
+Reboot and set Overrides:
+
+**1785 / 76.8 / 1600**
+
+Run:
+
+**Matrixprod -> 1 hour**
+
+If the 1-hour test fails, reduce High UV by another **1 level** and repeat the 1-hour test.
+
+Keep the **highest High UV level that passes the full hour**.
+
+---
+
+# 8. Confirm High UV + Final RAM Voltages
+
+Reboot.
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1785 MHz**
+- GPU: **76.8 MHz**
+- RAM: **1600 MHz**
+
+Run:
+
+**CPU-Memtester -> 1 hour**
+
+Any mismatch = FAIL.
+
+If it fails, first reduce **High UV by 1 level**.
+
+Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> CPU-Memtester for another hour.
+
+Do not immediately raise VDDQ or VDD2. Only investigate RAM voltages if reducing High UV does not fix the failure.
+
+---
+
+# 9. Final Normal Handheld Test
+
+Reboot.
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1020 MHz**
+- GPU: **384 MHz**
+- RAM: **1331 MHz**
+
+Run:
+
+1. **StressNX -> Matrixprod -> 1 hour**
+2. **Benchmark Toolbox -> MemTester -> 1 hour**
+3. **GPU Stress Test -> 1 hour**
+
+Everything must PASS.
+
+The GPU test here is a final validation of the inherited stock-clock GPU settings; this guide is not trying to retune the full GPU curve.
+
+---
+
+# 10. Final Nintendo Boost Test
+
+Reboot.
+
+Open Horizon OC and set Overrides:
+
+- CPU: **1785 MHz**
+- GPU: **76.8 MHz**
+- RAM: **1600 MHz**
+
+Run:
+
+1. **Matrixprod -> 1 hour**
+2. **MemTester -> 1 hour**
+3. **CPU-Memtester -> 1 hour**
+
+Everything must PASS.
+
+---
+
+# 11. Final Real-World Test
+
+Remove all manual Overrides.
+
+Use the console normally and test:
+
+- Game launch
+- Home Menu
+- Resume game
+- Sleep
+- Wake
+- Loading screens
+- CPU Boost
+- Return from CPU Boost
+
+Then play:
+
+**The Legend of Zelda: Tears of the Kingdom**
+
+for at least:
+
+**1 hour of active gameplay**
+
+No crashes, freezes, mismatches or reboots.
+
+Once everything is stable, save the finished setup with:
+
+`Performance Modes -> Save Settings -> as Battery Mode`
+
+You can then switch back to OC Mode and optionally create a new Safety Backup containing both final known-good profiles.
+
+---
+
+# Development-console battery-life result
 
 Red Dead Redemption was tested at the **same stock game clocks/settings**, with **50% display brightness** and **0% volume**:
 
@@ -135,7 +578,7 @@ Compared with the **true stock baseline**, Battery Mode ran **69 minutes longer*
 
 This result is an example, not a guarantee. Battery condition, silicon quality, RAM, game load, temperatures and your own voltage margins all matter.
 
-## App profiles
+# App profiles
 
 Horizon OC stores per-title CPU/GPU/RAM profiles inside the same `config.ini` that Performance Modes saves, so game profiles automatically switch together with Battery Mode / OC Mode.
 
@@ -145,7 +588,7 @@ If Battery Mode should use stock/default per-game clocks, run:
 
 This action only runs while **OC Mode is active**. If Battery Mode is active, nothing is changed and the package tells you to switch to OC Mode first.
 
-## Storage names and state
+# Storage names and state
 
 Battery Mode is stored under `Battery/`.  
 OC Mode is stored under `OCMode/`.
