@@ -1,28 +1,43 @@
 # Optional note to the Homebrew App Store maintainers
 
-**Subject:** Performance Modes — new Switch homebrew submission
+**Subject:** Performance Modes — new Switch Homebrew App Store submission
 
 Hi 4TU / Homebrew App Store team,
 
 I'd like to submit **Performance Modes**, an open-source Ultrahand package for Nintendo Switch and Horizon OC.
 
-It switches between two complete Horizon OC setups: **OC Mode**, which keeps the voltage and memory headroom needed for higher clocks, and a separate **stock-clock undervolting / efficiency profile** called Battery Mode.
+Performance Modes switches between two complete Horizon OC setups:
 
-The package switches the full Horizon OC configuration and `hoc.kip`, including per-game Horizon clock profiles, and automatically saves the profile being left before loading the other one. Battery per-game clock overrides can also be reset to stock/default from the package menu.
+- **OC Mode** for the user's normal overclock/performance configuration.
+- **Battery Mode** for a separate stock-clock undervolting / efficiency configuration.
 
-On the development OLED, Red Dead Redemption at the same stock game clocks/settings, 50% display brightness and 0% volume ran **4:56 on a stock no-OC/no-UV profile**, **5:32 on the OC Mode voltage profile**, and **6:05 on the tuned Battery Mode profile**. This is only an example; the project does not ship fixed OC/UV values and users must stability-test their own settings.
+The package saves and restores the complete Horizon OC `config.ini` and `hoc.kip`, so per-game Horizon clock profiles switch together with the selected mode. Optional ReverseNX-RT settings are saved/restored as well. The outgoing profile is saved automatically, the target profile is loaded, and CFW is then rebooted automatically so the selected `hoc.kip` becomes active.
 
-This is **not a standalone `.nro`**. It is an Ultrahand package installed under:
+This is **not a standalone `.nro`**. It is an Ultrahand package installed from an SD-root ZIP to:
 
 `/switch/.packages/Performance Modes/`
 
-Requirements are Ultrahand Overlay and Horizon OC. ReverseNX-RT integration is optional.
+Required existing software:
+- Ultrahand Overlay
+- Horizon OC
 
-OC Mode files are stored under `OCMode/`, and the active state marker is `OC Mode`. Older `PERFORMANCE` state values are migrated automatically when the package boots.
+ReverseNX-RT integration is optional.
 
-Repository, source, installation ZIP, documentation, license and artwork are available here:
+The project does **not** ship fixed overclock or undervolt values. Users must create and stability-test values appropriate for their own console. The included documentation provides a separate Battery Mode tuning guide.
 
+The package uses the visible state values `Battery Mode` and `OC Mode`. Profile files are stored under `Battery/` and `OCMode/`.
+
+Repository:
 https://github.com/retrotendo/Ultrahand-Performance-Modes
+
+Release:
+https://github.com/retrotendo/Ultrahand-Performance-Modes/releases/tag/v1.0
+
+Install ZIP:
+https://github.com/retrotendo/Ultrahand-Performance-Modes/releases/download/v1.0/Performance-Modes-v1.0.zip
+
+SHA256:
+`c850e8f444845df8d1f68d898dbb58800e61357f6a733869cc371e420528adb5`
 
 Thanks for reviewing the submission.
 
