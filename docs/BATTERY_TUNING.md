@@ -1,107 +1,121 @@
 # Battery profile tuning — practical quick guide
 
-Battery Mode is **not** a second maximum-overclock profile. The idea is to keep Battery Mode inside Nintendo's stock handheld frequency range and tune only the voltage headroom required for those lower clocks.
+Battery Mode is **not** a second maximum-overclock profile. It is intended to keep the console inside Nintendo's stock handheld frequency range while reducing the voltage headroom that is no longer needed for the higher clocks used by OC Mode.
 
-OC Mode can keep the voltage and memory headroom needed for your normal higher-clock setup while Battery Mode is tuned separately for efficiency.
+Performance Modes assumes that you already have a **known-good, stability-tested OC profile** for your console. That OC Mode should already contain CPU/GPU/RAM limits, voltage curves and other Horizon OC / HOC Toolkit values that you know are stable on your own hardware.
+
+Battery Mode starts from that known-good profile and simplifies it for stock handheld operation. In practice, the main Battery Mode efficiency controls are usually:
+
+- **RAM VDD2**
+- **RAM VDDQ**
+- **CPU Low UV** for normal stock-frequency handheld CPU operation
+
+Most other values can normally remain at their known-good OC Mode settings unless you have a specific reason to change them. If you retain a higher CPU boost limit such as 1785 MHz, the higher-frequency UV settings still need to remain stable, but they do not need to be the main Battery Mode tuning target.
 
 > [!WARNING]
-> There is no universal safe minimum voltage or universal UV level. Every CPU, GPU and RAM setup is different. Change one area at a time, test it, and keep a known-good OC Mode / Safety Backup.
+> There is no universal safe minimum voltage or universal UV level. Every CPU and RAM setup is different. Change one area at a time, test it, and keep a known-good OC Mode / Safety Backup.
 >
 > If an overly aggressive UV prevents normal CFW from booting, use your **Hekate `CFW no OC` / safe boot entry** if your setup provides one. Correct the value in Horizon OC or HOC Toolkit, save/apply it, then reboot normal CFW. Performance Modes does not create that Hekate entry.
 
-## Recommended Battery target
+## Recommended Battery starting point
 
-| Component | Battery validation target |
+Before lowering voltages, first create a conservative stock-behavior baseline:
+
+| Setting | Starting target |
 | --- | ---: |
-| CPU | **1785 MHz** stock boost step |
-| GPU | **384 MHz** stock handheld maximum |
-| RAM | **1600 MHz** stock boost-memory step |
+| Uncapped Clocks | **OFF** |
+| RAM HP Mode | **OFF** |
+| RAM Max Clock | **1600 MHz** |
+| VDD2 | **safe stock/default starting value** |
+| VDDQ | **safe stock/default starting value** |
+| CPU tuning focus | **Low UV at stock-frequency operation** |
+| GPU | **stock handheld behavior** |
+| Per-game Horizon clock overrides | **stock/default** |
 
-For the finished Battery profile:
+On the development OLED, the stock comparison baseline used **VDD2 1175 mV / VDDQ 600 mV**. These values are useful as conservative reference points for that console, not universal minimums.
 
-- `uncapped_clocks = 0` if you do not need OC-only clock steps.
-- Use stock/default per-title app clocks if Battery Mode is intended to be a true stock-clock profile.
-- Keep RAM at stock speed.
-- Tune only the GPU voltage points used by stock handheld clocks.
+### Optional CPU maximum / boost
 
-### CPU maximum / boost
+If desired, keep **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz** through HOC Toolkit. Stock game profiles can still remain at stock CPU clocks while the normal boost step remains available.
 
-Horizon OC itself may not offer **1785 MHz** in the normal CPU Max Clock / CPU Boost Clock selectors. Set both values to **1785 MHz in HOC Toolkit**, save/apply the HOC configuration, then reboot CFW so the updated `hoc.kip` is actually loaded.
+If the KIP is changed in HOC Toolkit, save/apply it and reboot CFW so the updated `hoc.kip` is actually loaded.
+
+The higher-frequency UV settings used by boost still need to be stable. However, for Battery Mode efficiency at normal stock handheld game clocks, **CPU Low UV is the main CPU tuning control**.
 
 ## Suggested tuning order
 
-### 1. Start from a known-good baseline
+### 1. Start from a known-good OC profile
 
-1. Boot and save a working **OC Mode** first.
+1. Boot and save your already tested **OC Mode**.
 2. Create the Battery profile slot from that known-good setup.
 3. Switch to Battery Mode.
-4. Set the stock Battery frequency limits above.
-5. Start from voltages / UV values already known to boot and run reliably.
+4. In **Horizon OC -> Safety Settings**, set **Uncapped Clocks OFF**.
+5. In **RAM Settings**, set **HP Mode OFF** and **RAM Max Clock = 1600 MHz**.
+6. Set VDD2/VDDQ to safe stock/default values before beginning the undervolt.
+7. Keep stock/default per-title CPU/GPU/RAM clocks if Battery Mode is intended to be a true stock-clock profile.
 
-Do not lower VDD2, VDDQ, CPU High UV and GPU voltage all at the same time. If a test fails, you need to know which change caused it.
+Do not lower VDD2, VDDQ and CPU Low UV all at the same time. If a test fails, you need to know which change caused it.
 
 ### 2. Tune RAM VDD2 first
 
 Keep **VDDQ at a known-safe value** while finding VDD2.
 
-1. Set RAM to **1600 MHz** with Temporary Overrides.
+1. Keep RAM at **1600 MHz** with HP Mode OFF.
 2. Lower **VDD2** by one available step.
 3. Reboot if required for the value to become active.
 4. Run **Benchmark Toolbox -> RAM -> Memtester**.
 5. Use short passes while approaching the edge, then run a promising candidate for about **30 minutes**.
 6. At the first mismatch, freeze or crash, return to the previous stable step.
 
-Development-console Battery value: **912.5 mV**.  
+Development-console Battery value: **~912.5 mV**.  
+Development-console stock baseline: **1175 mV**.  
 Development-console OC Mode value: **1087.5 mV**.
 
 ### 3. Tune VDDQ second
 
 Keep the stable VDD2 value fixed and tune VDDQ independently.
 
-1. Keep RAM at **1600 MHz**.
+1. Keep RAM at **1600 MHz** with HP Mode OFF.
 2. Lower VDDQ one available step at a time.
 3. Run Memtester again.
 4. At the first error / mismatch / crash, return to the previous stable step.
 5. After both RAM voltages are chosen, run **30–60 minutes** of Memtester with the final pair active together.
 
 Development-console Battery value: **400 mV**.  
-Development-console OC Mode value: **600 mV**.
+Development-console stock baseline: **600 mV**.
 
-### 4. Tune CPU High UV at stock boost
+### 4. Tune CPU Low UV for stock-frequency operation
 
-1. Set CPU Max Clock / CPU Boost Clock to **1785 MHz through HOC Toolkit**.
-2. Use a **1785 MHz** CPU Temporary Override.
-3. Start from a known-stable High UV level.
-4. Increase High UV one step at a time; a higher UV setting is a more aggressive undervolt.
-5. Reboot when required.
-6. Run **Benchmark Toolbox -> CPU Stress -> Matrixprod**.
-7. Use short passes while approaching the limit, then about **30 minutes** on a final candidate.
-8. Any mismatch, freeze, app crash or CFW reboot means the undervolt is too aggressive. Step back.
+For Battery Mode, the goal is to optimize the CPU range actually used during normal stock handheld gaming rather than retune the full high-clock CPU curve.
 
-Do not rely only on the rounded voltage shown by an overlay. During development, a more aggressive High UV level could display the same approximate voltage while still failing Matrixprod.
+1. Keep stock/default game CPU clocks.
+2. Start from a known-stable **CPU Low UV** level.
+3. Increase the Low UV setting one step at a time; a higher UV setting is a more aggressive undervolt.
+4. Reboot when required.
+5. Run CPU stress tests and real games that exercise the normal stock-frequency CPU range.
+6. Any mismatch, freeze, application crash or CFW reboot means the undervolt is too aggressive. Step back.
+7. Once a candidate is found, perform a longer combined validation with the final RAM voltages active as well.
 
-### 5. Tune GPU only for stock handheld clocks
+If you retain a 1785 MHz CPU boost limit, leave the higher-frequency UV side at a **known-stable value** from your existing OC profile unless you specifically want to tune it separately. It is not necessary to chase the lowest possible high-frequency voltage just to build an effective Battery Mode.
 
-For Battery Mode, validate only the stock handheld GPU range you actually use. The highest relevant stock handheld point is **384 MHz**.
+### 5. GPU and other OC settings
 
-The development OLED/Mariko console used **500 mV** from 76.8 through 384 MHz. Those values are examples, not universal safe values.
+If your existing OC profile already has stable GPU voltage points and other Horizon OC settings, there is normally no need to retune all of them for Battery Mode.
 
-Use **Benchmark Toolbox -> GPU Stress / FurMark** and treat any mismatch, graphics crash or CFW instability as a failed setting.
+Battery Mode uses stock handheld GPU clocks, so the full high-clock GPU curve is not a primary Battery Mode tuning lever. The same applies to other OC-only parameters that are not used at stock handheld frequencies.
+
+Keep these values at known-good settings unless you have a specific reason and a separate stability-testing plan for changing them.
 
 ### 6. Final combined validation
 
-Once the individual domains are stable, validate the completed Battery profile with the relevant stock limits:
+Once VDD2, VDDQ and CPU Low UV are individually stable, validate the completed Battery profile with the intended stock handheld limits.
 
-- CPU **1785 MHz**
-- RAM **1600 MHz**
-- GPU **384 MHz**
+Recommended final checks:
 
-Then run separately:
-
-1. **CPU Matrixprod — about 30 min**
-2. **RAM Memtester — at least 30 min; 60 min is better for the final RAM combination**
-3. **GPU Stress / FurMark — about 30 min at 384 MHz**
-4. Several real games for longer sessions
+1. **RAM Memtester — at least 30 min; 60 min is better for the final RAM combination**
+2. **CPU stress testing at the stock-frequency range**
+3. Several real games for longer sessions
+4. Repeated mode changes between Battery Mode and OC Mode to verify both stored profiles still load correctly
 
 A synthetic pass is useful screening, not absolute proof of long-term stability. Keep some margin if you want dependable daily settings.
 
@@ -115,11 +129,9 @@ Red Dead Redemption was tested at the **same stock game clocks/settings**, with 
 | VDDQ | 600 mV | 600 mV | 400 mV |
 | Runtime | 4 h 56 min | 5 h 32 min | 6 h 05 min |
 
-Battery Mode vs OC Mode: **+33 minutes / +9.9% runtime**, equivalent to roughly **9.0% lower average whole-device power draw** in that test.
+Compared with the **true stock baseline**, OC Mode ran **36 minutes longer**, or about **+12.2% runtime**, equivalent to roughly **10.8% lower average whole-device power draw** at the same game clocks/settings.
 
-Battery Mode vs true stock: **+69 minutes / +23.3% runtime**, equivalent to roughly **18.9% lower average whole-device power draw**.
-
-OC Mode vs true stock: **+36 minutes / +12.2% runtime**, equivalent to roughly **10.8% lower average whole-device power draw**.
+Compared with the **true stock baseline**, Battery Mode ran **69 minutes longer**, or about **+23.3% runtime**, equivalent to roughly **18.9% lower average whole-device power draw** at the same game clocks/settings.
 
 This result is an example, not a guarantee. Battery condition, silicon quality, RAM, game load, temperatures and your own voltage margins all matter.
 
@@ -133,9 +145,12 @@ If Battery Mode should use stock/default per-game clocks, run:
 
 This action only runs while **OC Mode is active**. If Battery Mode is active, nothing is changed and the package tells you to switch to OC Mode first.
 
-## Storage names
+## Storage names and state
 
 Battery Mode is stored under `Battery/`.  
 OC Mode is stored under `OCMode/`.
 
-The internal state values are `BATTERY` and `OC Mode`. Older `PERFORMANCE` state values are migrated automatically to `OC Mode` when the package boots.
+The package uses the visible state values directly:
+
+- `Battery Mode`
+- `OC Mode`
