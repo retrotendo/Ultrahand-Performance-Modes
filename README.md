@@ -34,9 +34,9 @@ On the development OLED, Red Dead Redemption was tested at the **same stock game
 | VDDQ | 600 mV | 600 mV | 400 mV |
 | Runtime | 4 h 56 min | 5 h 32 min | 6 h 05 min |
 
-Compared with **OC Mode**, Battery Mode ran **33 minutes longer**, or about **+9.9% runtime**. For the same usable battery energy, that corresponds to roughly **9.0% lower average whole-device power draw** during that test.
+Compared with the **true stock baseline**, OC Mode ran **36 minutes longer**, or about **+12.2% runtime**, corresponding to roughly **10.8% lower average whole-device power draw** at the same game clocks/settings.
 
-Compared with the **true stock baseline**, Battery Mode ran **69 minutes longer**, or about **+23.3% runtime**, corresponding to roughly **18.9% lower average whole-device power draw**. Even the OC Mode voltage profile ran **36 minutes / +12.2% longer than stock**, corresponding to roughly **10.8% lower average whole-device power draw** at the same game clocks/settings.
+Compared with the **true stock baseline**, Battery Mode ran **69 minutes longer**, or about **+23.3% runtime**, corresponding to roughly **18.9% lower average whole-device power draw** at the same game clocks/settings.
 
 This is one console and one workload, not a guaranteed result. Actual benefit depends on silicon quality, RAM, voltages, game workload, display brightness, battery condition and the settings used in both profiles.
 
