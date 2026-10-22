@@ -228,27 +228,11 @@ Run:
 
 **MemTester -> 1 hour**
 
-### PASS
+### Did the combined test pass?
 
-Keep both values.
-
-### FAIL
-
-Do not raise both voltages together.
-
-First increase **VDDQ by 10 mV**.
-
-Reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 hour.
-
-Still fails?
-
-Return VDDQ to the previous value.
-
-Then increase **VDD2 by 12.5 mV**.
-
-Reboot and repeat the 1-hour test.
-
-This keeps troubleshooting to one voltage at a time.
+| ✅ YES | ❌ NO |
+| --- | --- |
+| Keep both final values. The VDDQ/VDD2 pair is confirmed at **1785 / 76.8 / 1600**. | Do **not** raise both voltages together.<br><br>First increase **VDDQ by 10 mV**. Save KIP -> reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 hour.<br><br>If it still FAILS, restore VDDQ to the previous value. Then increase **VDD2 by 12.5 mV**. Save KIP -> reboot -> set the Overrides again -> repeat MemTester for 1 hour.<br><br>This keeps troubleshooting to one voltage at a time. |
 
 ---
 
@@ -409,41 +393,3 @@ Once everything is stable, save the finished setup with:
 `Performance Modes -> Save Settings -> as Battery Mode`
 
 You can then switch back to OC Mode and optionally create a new Safety Backup containing both final known-good profiles.
-
----
-
-# Development-console battery-life result
-
-Red Dead Redemption was tested at the **same stock game clocks/settings**, with **50% display brightness** and **0% volume**:
-
-| Setting | Stock — no OC/UV profile | OC Mode profile | Battery Mode profile |
-| --- | ---: | ---: | ---: |
-| VDD2 | 1175 mV | 1087.5 mV | ~912.5 mV |
-| VDDQ | 600 mV | 600 mV | 400 mV |
-| Runtime | 4 h 56 min | 5 h 32 min | 6 h 05 min |
-
-Compared with the **true stock baseline**, OC Mode ran **36 minutes longer**, or about **+12.2% runtime**, equivalent to roughly **10.8% lower average whole-device power draw** at the same game clocks/settings.
-
-Compared with the **true stock baseline**, Battery Mode ran **69 minutes longer**, or about **+23.3% runtime**, equivalent to roughly **18.9% lower average whole-device power draw** at the same game clocks/settings.
-
-This result is an example, not a guarantee. Battery condition, silicon quality, RAM, game load, temperatures and your own voltage margins all matter.
-
-# App profiles
-
-Horizon OC stores per-title CPU/GPU/RAM profiles inside the same `config.ini` that Performance Modes saves, so game profiles automatically switch together with Battery Mode / OC Mode.
-
-If Battery Mode should use stock/default per-game clocks, run:
-
-`Setup -> Reset Battery App Profiles -> STOCK`
-
-This action only runs while **OC Mode is active**. If Battery Mode is active, nothing is changed and the package tells you to switch to OC Mode first.
-
-# Storage names and state
-
-Battery Mode is stored under `Battery/`.  
-OC Mode is stored under `OCMode/`.
-
-The package uses the visible state values directly:
-
-- `Battery Mode`
-- `OC Mode`
