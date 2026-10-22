@@ -14,10 +14,10 @@ Performance Modes
 retrotendo
 
 **Category**  
-Utilities / Tools if available. Otherwise use Misc.
+Tools
 
 **Contact info**  
-Enter your own e-mail address or Discord handle.
+Enter your preferred e-mail address or Discord handle.
 
 **Version**  
 1.0
@@ -29,30 +29,27 @@ MIT
 https://github.com/retrotendo/Ultrahand-Performance-Modes
 
 **Short description**  
-Switch between an OC Mode profile and a stock-clock undervolting Battery Mode profile from Ultrahand.
+Ultrahand profile switcher for Horizon OC with separate OC and battery-focused undervolting modes.
 
 **Detailed description**  
-Performance Modes is an Ultrahand package for Horizon OC that lets you keep two complete setups: **OC Mode** for your normal overclock/performance configuration and **Battery Mode** for a separate stock-clock undervolting profile focused on battery life.
+Performance Modes is an Ultrahand package for Horizon OC that switches between two complete setups: OC Mode for your normal overclock/performance profile and Battery Mode for a stock-clock undervolting profile focused on battery life.
 
-OC Mode keeps the voltage, memory and clock headroom needed for higher overclocks. Battery Mode is designed around Nintendo stock handheld clocks, so VDD2, VDDQ, CPU High UV and the required GPU voltage points can be tuned specifically for those lower operating points.
+It saves and restores the complete Horizon OC config.ini and hoc.kip for each mode, including per-game Horizon clock profiles. Optional ReverseNX-RT settings are switched with the selected mode as well. The outgoing profile is saved automatically before the other profile is loaded, then CFW reboots automatically so the selected hoc.kip becomes active.
 
-On the development OLED, Red Dead Redemption at identical stock game clocks/settings, 50% display brightness and 0% volume ran **4:56 with a stock no-OC/no-UV profile**, **5:32 with the OC Mode voltage profile**, and **6:05 with the tuned Battery Mode profile**. Battery Mode was +23.3% runtime versus stock and +9.9% versus OC Mode. Results vary by console and settings.
+Battery Mode is intended for users who already have a stable OC profile and want a separate efficiency profile using stock handheld clocks. The package does not ship fixed OC/UV values; each console must be stability-tested individually.
 
-The package switches the complete Horizon OC config and hoc.kip. All per-game Horizon clock profiles therefore switch with the mode as well. Battery app profiles can be reset to stock/default clocks from the menu, and the complete optional ReverseNX-RT settings folder is saved and restored with each mode when present.
-
-When changing mode, the current profile is saved, the other profile is loaded and CFW reboots. This reboot is intentional and required to load the selected hoc.kip.
-
-Requires Ultrahand and Horizon OC. Undervolting limits are console-specific and must be stability-tested by the user.
+Requires Ultrahand Overlay and Horizon OC. ReverseNX-RT is optional.
 
 **Changelog**  
 Initial release:
-- Battery Mode / OC Mode profile switching
-- Full Horizon OC config + hoc.kip saved per mode
-- Automatic save of the profile being left
+- Battery Mode ↔ OC Mode profile switching
+- Full Horizon OC config.ini + hoc.kip stored per mode
+- Automatic saving of the outgoing profile
+- Automatic CFW reboot after changing modes
 - Per-game Horizon clock profiles switch with each mode
-- Reset Battery app profiles to stock/default clocks
 - Optional ReverseNX-RT folder save/restore
-- Manual Safety Backup / Restore
+- Reset Battery app profiles to stock/default clocks
+- Safety Backup / Restore
 - Protection against overwriting profiles when current state is unknown
 
 **Banner image**  
@@ -64,9 +61,20 @@ Initial release:
 **Screenshot**  
 `assets/performance-modes-screenshot.jpg`
 
+## Release
+
+**GitHub release**  
+https://github.com/retrotendo/Ultrahand-Performance-Modes/releases/tag/v1.0
+
+**Install ZIP**  
+https://github.com/retrotendo/Ultrahand-Performance-Modes/releases/download/v1.0/Performance-Modes-v1.0.zip
+
+**SHA256**  
+`c850e8f444845df8d1f68d898dbb58800e61357f6a733869cc371e420528adb5`
+
 ## Notes for the reviewer
 
-Performance Modes is an **Ultrahand package**, not a standalone `.nro` application. The install ZIP places the package under:
+Performance Modes is an **Ultrahand package**, not a standalone `.nro` application. The SD-root install ZIP places the package under:
 
 ```text
 /switch/.packages/Performance Modes/
@@ -80,18 +88,24 @@ ReverseNX-RT support is optional.
 
 The project does not ship fixed overclock/undervolt values. Users create and stability-test their own OC Mode and Battery Mode settings.
 
-OC Mode is stored under `OCMode/`, and its package state marker is `OC Mode`. Older `PERFORMANCE` state values are migrated automatically when the package boots.
+The package uses the visible state values directly:
+- `Battery Mode`
+- `OC Mode`
 
-## Final checklist before submitting
+Profile storage folders are `Battery/` and `OCMode/`.
+
+## Final checklist
 
 - Public GitHub repository: ready
 - MIT license: ready
-- README and setup guide: ready
+- README: ready
+- Setup guide: ready
 - Battery tuning guide: ready
+- GitHub v1.0 release: ready
 - Installable SD-root ZIP: ready
+- Release SHA256 verified: ready
 - Banner: ready
 - Icon: ready
 - Screenshot: ready
 - Changelog: ready
-- Contact field: user must enter e-mail or Discord handle
-- GitHub release: recommended before submission so future releases can be detected automatically by HBAS
+- Contact field: enter preferred e-mail or Discord handle before submitting
