@@ -22,9 +22,9 @@ Battery Mode is therefore not intended as a second maximum-OC profile. It is a *
 - **OC Mode** keeps the headroom needed for higher CPU/GPU/RAM clocks.
 - **Battery Mode** uses stock handheld clocks and can be tuned specifically for efficiency and battery life.
 
-Once a stable OC Mode already exists, the main Battery Mode efficiency controls are typically **RAM VDD2**, **RAM VDDQ** and **CPU Low UV** for normal stock-frequency handheld CPU operation. Other Horizon OC / HOC Toolkit values can normally remain at the known-good settings inherited from OC Mode unless you have a specific reason to change them. If you retain a higher CPU boost limit, the corresponding higher-frequency UV settings still need to remain stable, but they do not need to be the main Battery Mode tuning target.
+Once a stable OC Mode already exists, the main Battery Mode efficiency controls are typically **RAM VDD2**, **RAM VDDQ** and **CPU Low UV** for normal stock-frequency handheld CPU operation. Other Horizon OC / HOC Toolkit values can normally remain at the known-good settings inherited from OC Mode unless you have a specific reason to change them.
 
-See the [Battery tuning guide](docs/BATTERY_TUNING.md) for a practical walkthrough.
+See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) for the complete tuning process.
 
 ### Example battery-life result
 
@@ -109,32 +109,20 @@ Setup
 
 ## First-time setup
 
-Performance Modes assumes that your normal OC configuration is already **stable and tested on your own console**. Start from that known-good OC setup, save it first, and create a Safety Backup before changing anything for Battery Mode.
+Keep the initial setup simple. Detailed undervolting belongs in the Battery tuning guide.
 
 1. Boot your known-good OC configuration.
 2. Open **Setup** and choose **Mark Current Boot -> OC Mode**.
 3. On **Main**, choose **Save Settings -> as OC Mode**.
-4. Open **Setup -> Backup Files** and choose **Create Safety Backup**. Do this before creating or tuning Battery Mode so you have a recovery snapshot of the known-good OC configuration, saved OC Mode files and package state.
-5. Without changing anything yet, choose **Save Settings -> as Battery Mode**. This creates a safe temporary Battery clone from the known-good OC profile.
-6. Choose **Battery Mode**. Performance Modes saves OC Mode, loads the temporary Battery clone and **automatically reboots CFW**.
-7. Prepare a conservative Battery baseline before undervolting:
-   - In **Horizon OC -> Safety Settings**, turn **Uncapped Clocks OFF**.
-   - In **RAM Settings**, set **HP Mode OFF**.
-   - Set **RAM Max Clock = 1600 MHz**.
-   - Start **VDD2** and **VDDQ** from safe stock/default values before lowering them. On the development OLED, the stock comparison baseline was **VDD2 1175 mV / VDDQ 600 mV**.
-   - Keep GPU behavior at stock handheld clocks. If the GPU curve inherited from OC Mode is already stable at those clocks, there is normally no need to retune the full GPU curve just to create Battery Mode.
-   - Use stock/default per-game CPU/GPU/RAM clocks if the goal is a true stock-clock efficiency profile.
-   - Keep the rest of the Horizon OC / HOC Toolkit configuration at known-good values inherited from OC Mode unless there is a specific reason to change it.
-8. If desired, keep **CPU Max Clock = 1785 MHz** and **CPU Boost Clock = 1785 MHz** through HOC Toolkit. The higher-frequency UV side still needs to remain stable, but it does not need to be the main Battery Mode tuning target.
-9. Tune the Battery-specific efficiency controls one at a time:
-   - lower **VDD2** and stability-test it;
-   - then lower **VDDQ** and stability-test the final VDD2/VDDQ pair;
-   - then tune **CPU Low UV** for the stock-frequency CPU range.
-10. After the Battery settings are stable, use **Save Settings -> as Battery Mode** as an explicit checkpoint.
-11. Choose **OC Mode**. Performance Modes restores the OC profile and **automatically reboots CFW**.
-12. If you want Battery games to use stock/default app clocks, open **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
-13. Open **Setup -> Check Files**. When all four core files are present, it reports `All 4 files: OK`.
-14. Once both modes are fully tested and known-good, you can optionally run **Create Safety Backup** again to replace the initial OC-only safety snapshot with a complete backup of both finished modes.
+4. Open **Setup -> Backup Files** and choose **Create Safety Backup**.
+5. On **Main**, choose **Save Settings -> as Battery Mode**. This creates a temporary Battery Mode copy from the known-good OC profile.
+6. Choose **Battery Mode**. Performance Modes saves OC Mode, loads Battery Mode and **automatically reboots CFW**.
+7. Follow the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) to find your stable Battery Mode values.
+8. When Battery Mode is stable, choose **Save Settings -> as Battery Mode**.
+9. Choose **OC Mode**. Performance Modes restores OC Mode and **automatically reboots CFW**.
+10. If you want Battery Mode to use stock/default per-game clocks, run **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
+11. Run **Setup -> Check Files**. When all four required files are present, it reports `All 4 files: OK`.
+12. Once both modes are final and known-good, optionally run **Create Safety Backup** again to replace the initial backup with a complete backup of both finished modes.
 
 For a shorter operational version, see [Setup and Usage Guide](docs/SETUP.md).
 
