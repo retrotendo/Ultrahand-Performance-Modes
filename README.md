@@ -53,7 +53,7 @@ This is one console and one workload, not a guaranteed result. Actual benefit de
 - Safety state: if the package cannot confirm whether Battery Mode or OC Mode is active, it does **not** overwrite either stored profile.
 - **Check Files** verifies the four core files and reports `All 4 files: OK` when all are present.
 
-The reboot after changing mode is intentional and required: the active `hoc.kip` is replaced during the switch, and CFW must restart so the selected KIP/profile is actually loaded.
+After changing modes, **Performance Modes automatically reboots CFW**. This is intentional and required because the active `hoc.kip` is replaced during the switch and must be reloaded before the selected KIP/profile becomes active.
 
 ## Requirements
 
