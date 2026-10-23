@@ -224,7 +224,7 @@ Run:
 
 **Matrixprod -> 1 minute**
 
-at **each Low VMIN test clock**.
+at **each Low VMIN test clock from Step 2**.
 
 If all test clocks **PASS**, keep this Low VMIN value as your candidate for the long confirmation test.
 
