@@ -25,6 +25,7 @@ Prepare Battery Mode for stock-handheld behavior before starting the undervoltin
 - **VDDQ: 600 mV** or your known stable lower value
 
 **CPU Settings**
+- **CPU Low VMIN: 620mv** or your known-stable value
 - **CPU Max Clock: set to the lowest selectable value**
 - **CPU UV Table: 1683 MHz Tbreak** or your known-working CPU UV table
 - **Low UV: 0** or your known-stable value
