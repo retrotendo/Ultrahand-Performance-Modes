@@ -22,9 +22,9 @@ Battery Mode is therefore not intended as a second maximum-OC profile. It is a *
 - **OC Mode** keeps the headroom needed for higher CPU/GPU/RAM clocks.
 - **Battery Mode** uses stock handheld clocks and can be tuned specifically for efficiency and battery life.
 
-Once a stable OC Mode already exists, the main Battery Mode efficiency controls are typically **RAM VDD2**, **RAM VDDQ** and **CPU Low UV** for normal stock-frequency handheld CPU operation. Other Horizon OC / HOC Toolkit values can normally remain at the known-good settings inherited from OC Mode unless you have a specific reason to change them.
+Once a stable OC Mode already exists, the main Battery Mode efficiency controls are typically **RAM VDD2**, **RAM VDDQ**, **CPU High UV** and **CPU Low UV** for normal stock-frequency handheld CPU operation. Other Horizon OC / HOC Toolkit values can normally remain at the known-good settings inherited from OC Mode unless you have a specific reason to change them.
 
-See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) for the complete tuning process.
+See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) for the complete tuning process or use your own known values. In short if you tuned in a proper OC Profil before: Set CPU, CPU Boost and Ram Max Frequencies to the Max stock frequencies and find your lowest VDD2 and VDDQ voltages to be stable at these frequencies range.   
 
 ### Example battery-life result
 
@@ -32,7 +32,7 @@ On the development OLED (Speedo 1659/1677/1720), Red Dead Redemption was tested 
 
 | Setting | Stock | OC Mode | Battery Mode |
 | --- | ---: | ---: | ---: |
-| VDD2 | 1175 mV | 1087.5 mV | ~912.5 mV |
+| VDD2 | 1175 mV | 1087.5 mV | 912.5 mV |
 | VDDQ | 600 mV | 600 mV | 400 mV |
 | Runtime | 4 h 56 min | 5 h 32 min | 6 h 05 min |
 
@@ -117,7 +117,7 @@ Keep the initial setup simple. Detailed undervolting belongs in the Battery tuni
 4. Open **Setup -> Backup Files** and choose **Create Safety Backup**.
 5. On **Main**, choose **Save Settings -> as Battery Mode**. This creates a temporary Battery Mode copy from the known-good OC profile.
 6. Choose **Battery Mode**. Performance Modes saves OC Mode, loads Battery Mode and **automatically reboots CFW**.
-7. Follow the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) to find your stable Battery Mode values.
+7. Follow the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) to find your stable Battery Mode values or use your own known values. In short if you tuned in a proper OC Profil before: Set CPU, CPU Boost and Ram Max Frequencies to the Max stock frequencies and find your lowest VDD2 and VDDQ voltages to be stable at these frequencies range.   
 8. When Battery Mode is stable, choose **Save Settings -> as Battery Mode**.
 9. Choose **OC Mode**. Performance Modes restores OC Mode and **automatically reboots CFW**.
 10. If you want Battery Mode to use stock/default per-game clocks, run **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
