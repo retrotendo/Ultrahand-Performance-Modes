@@ -176,26 +176,24 @@ Keep your final **Low UV** value from Step 1 and keep VDD2/VDDQ unchanged.
 ### Does the Switch boot?
 
 <table width="100%">
-  <thead>
-    <tr>
-      <th width="50%">✅ YES</th>
-      <th width="50%">❌ NO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td width="50%" valign="top">
+<thead>
+<tr>
+<th width="50%">✅ YES</th>
+<th width="50%">❌ NO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td width="50%" valign="top">
 <ol>
 <li>Lower Low VMIN to the <strong>next available value</strong>.</li>
 <li>Reboot again.</li>
 <li>If the Switch still boots, lower Low VMIN by another step.</li>
 <li>Continue until you reach the first Low VMIN value that no longer boots.</li>
 </ol>
-
-The last value that still booted is your first candidate.
-
-      </td>
-      <td width="50%" valign="top">
+<p>The last value that still booted is your first candidate.</p>
+</td>
+<td width="50%" valign="top">
 <ol>
 <li>Boot Hekate.</li>
 <li>Start <strong>CFW without Horizon OC / hoc.kip</strong>.</li>
@@ -203,13 +201,15 @@ The last value that still booted is your first candidate.
 <li>Restore the <strong>previous Low VMIN value</strong>.</li>
 <li>Reboot normally.</li>
 </ol>
-
-The restored value is your first candidate.
-
-      </td>
-    </tr>
-  </tbody>
+<p>The restored value is your first candidate.</p>
+</td>
+</tr>
+</tbody>
 </table>
+
+> **Important:** After you have found the lowest Low VMIN value that still boots, you must test **every Low VMIN test clock identified in Step 2**. Do not test only one of them.
+>
+> If any of these frequencies fails or crashes, increase Low VMIN by **one step**, reboot, and test **all Step 2 frequencies again**.
 
 ### Test the candidate
 
