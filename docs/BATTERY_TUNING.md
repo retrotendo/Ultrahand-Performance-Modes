@@ -21,14 +21,14 @@ Prepare Battery Mode with a conservative stock-handheld baseline before starting
 **RAM Settings**
 - **HP Mode: OFF**
 - **RAM Max Clock: 1600 MHz**
-- **VDD2: 1175 mV**
-- **VDDQ: 600 mV**
+- **VDD2: 1175 mV** or your known stable lower value
+- **VDDQ: 600 mV** or your known stable lower value
 
 **CPU Settings**
 - **CPU Max Clock: set to the lowest selectable value**
-- **CPU UV Table: Normal**
-- **Low UV: 0**
-- **High UV: 0**
+- **CPU UV Table: 1683Mhz Tbreak** or your already known working values
+- **Low UV: 0** or your known working highest values
+- **High UV: 0** or your known working highest values
 
 ### HOC Toolkit
 
