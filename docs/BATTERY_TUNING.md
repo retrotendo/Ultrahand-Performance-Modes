@@ -163,16 +163,14 @@ Your exact clocks and voltage steps may be different, so always determine them f
 
 # 3. Find the Lowest Stable Low VMIN
 
-Keep the final **Low UV** value from Step 1.
+Use the **Low VMIN test clocks identified in Step 2**.
 
-Keep VDD2 and VDDQ at the baseline values selected in **Before you start**.
+Keep your final **Low UV** value from Step 1 and keep VDD2/VDDQ unchanged.
 
-Use the **Low VMIN test clocks you identified in Step 2** for the tests below.
-
-### Start
+### Find the lowest value that still boots
 
 1. Open Horizon OC.
-2. Lower Low VMIN to the **next available mV value**.
+2. Lower **Low VMIN** to the next available value.
 3. Reboot.
 
 ### Does the Switch boot?
@@ -188,18 +186,14 @@ Use the **Low VMIN test clocks you identified in Step 2** for the tests below.
     <tr>
       <td width="50%" valign="top">
 <ol>
-<li>Open Horizon OC.</li>
-<li>Check the CPU voltages again around the clocks identified in Step 2.</li>
-<li>If the voltage steps have changed, update your Low VMIN test clocks using the same method from Step 2.</li>
-<li>Keep GPU at <strong>384 MHz</strong> and RAM at <strong>1331 MHz</strong>.</li>
-<li>Run <strong>Matrixprod -> 1 minute</strong> at each of your Low VMIN test clocks.</li>
-<li>If all test clocks <strong>PASS</strong>, lower Low VMIN to the <strong>next lower available value</strong>.</li>
-<li>Reboot.</li>
-<li>Check the voltage steps again and update the test clocks if needed.</li>
-<li>Run <strong>Matrixprod for 1 minute</strong> again at each Low VMIN test clock.</li>
-<li>If all test clocks <strong>PASS</strong>, lower Low VMIN by another available step and repeat steps 7–9 with the new value.</li>
-<li>When any Low VMIN test clock <strong>FAILS</strong>, restore the <strong>previous passing Low VMIN value</strong> and reboot. That restored value is your candidate.</li>
+<li>Lower Low VMIN to the <strong>next available value</strong>.</li>
+<li>Reboot again.</li>
+<li>If the Switch still boots, lower Low VMIN by another step.</li>
+<li>Continue until you reach the first Low VMIN value that no longer boots.</li>
 </ol>
+
+The last value that still booted is your first candidate.
+
       </td>
       <td width="50%" valign="top">
 <ol>
@@ -208,35 +202,47 @@ Use the **Low VMIN test clocks you identified in Step 2** for the tests below.
 <li>Open Horizon OC.</li>
 <li>Restore the <strong>previous Low VMIN value</strong>.</li>
 <li>Reboot normally.</li>
-<li>Use the restored Low VMIN value as your candidate.</li>
 </ol>
+
+The restored value is your first candidate.
+
       </td>
     </tr>
   </tbody>
 </table>
 
-### Confirm the candidate
+### Test the candidate
 
-With the candidate Low VMIN, check the CPU voltage steps once more and confirm your Low VMIN test clocks.
+Use the **Low VMIN test clocks from Step 2**.
 
 Keep:
 
 - GPU: **384 MHz**
 - RAM: **1331 MHz**
 
+Run:
+
+**Matrixprod -> 1 minute**
+
+at **each Low VMIN test clock**.
+
+If all test clocks **PASS**, keep this Low VMIN value as your candidate for the long confirmation test.
+
+If any test clock **FAILS or crashes**:
+
+1. Increase Low VMIN by **one step**
+2. Reboot
+3. Test **all Low VMIN test clocks again**
+
+Repeat until every test clock passes.
+
+### Confirm the final candidate
+
 Run **Matrixprod -> 1 hour** at each Low VMIN test clock.
 
-You do not need to separately test lower CPU clocks that use the same voltage. Test the **highest CPU frequency for each different voltage level** you identified in Step 2.
+If any test fails, increase Low VMIN by one more step, reboot and repeat the tests.
 
-Also check normal system behavior:
-
-- Home Menu
-- Sleep
-- Wake
-- Launch a game
-- Close a game
-
-If anything fails, raise Low VMIN to the **previous mV value** and repeat the checks.
+Keep the **lowest Low VMIN value that passes all test clocks**.
 
 ---
 
