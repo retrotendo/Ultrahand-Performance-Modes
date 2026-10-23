@@ -17,7 +17,7 @@ Prepare Battery Mode for stock handheld behavior:
 - **RAM Settings -> HP Mode: OFF**
 - **RAM Max Clock: 1600 MHz**
 - **CPU Max Clock: set to the lowest selectable value in HOC Toolkit**
-- **CPU Boost Clock: set to the lowest selectable value in HOC Toolkit** The stock boost limit cannot be selected directly in Horizon OC, so it must be set through HOC Toolkit. After applying the settings and rebooting CFW, Horizon OC will reflect the new CPU limits.
+- **CPU Boost Clock: set to the lowest selectable value in HOC Toolkit.** The stock boost limit cannot be selected directly in Horizon OC, so it must be set through HOC Toolkit. After applying the settings and rebooting CFW, Horizon OC will reflect the new CPU limits.
 - **Use stock/default per-game CPU/GPU/RAM clocks**
 
 Start the undervolting process from this conservative baseline:
