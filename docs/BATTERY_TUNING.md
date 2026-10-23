@@ -120,11 +120,54 @@ Keep the **highest Low UV level that passes the full hour**.
 
 ---
 
-# 2. Find the Lowest Stable Low VMIN
+# 2. Find Your Low VMIN Test Clocks
 
-Keep the final Low UV value from Step 1.
+Keep the final **Low UV** value from Step 1.
+
+Before tuning Low VMIN, first find out how the CPU voltage changes across the lower CPU clocks on your console.
+
+### Find the clocks to test
+
+1. Reboot with your current settings.
+2. Open Horizon OC.
+3. Use **CPU Override** and step through the available CPU clocks from low to high.
+4. Watch the reported CPU voltage in your overlay.
+5. Whenever several CPU clocks use the same voltage, note only the **highest clock that still uses that voltage**.
+
+These highest clocks for each different voltage level will be your **Low VMIN test clocks** in the next step.
+
+### Example
+
+With:
+
+- Low VMIN: **570 mV**
+- Low UV: **1**
+
+one console may show approximately:
+
+- 510–816 MHz -> **570 mV**
+- 918 MHz -> **570–585 mV**
+- 1020 MHz -> **600 mV**
+
+In this example, the useful test clocks are:
+
+- **816 MHz** -> highest clock at 570 mV
+- **918 MHz** -> highest clock in the 570–585 mV transition range
+- **1020 MHz** -> highest clock at 600 mV in this example
+
+There is no need to separately stress-test 510, 612 or 714 MHz if they all run at the same **570 mV**. The highest frequency using that voltage is the more demanding test point.
+
+Your exact clocks and voltage steps may be different, so always determine them from the values shown on your own console.
+
+---
+
+# 3. Find the Lowest Stable Low VMIN
+
+Keep the final **Low UV** value from Step 1.
 
 Keep VDD2 and VDDQ at the baseline values selected in **Before you start**.
+
+Use the **Low VMIN test clocks you identified in Step 2** for the tests below.
 
 ### Start
 
@@ -146,14 +189,16 @@ Keep VDD2 and VDDQ at the baseline values selected in **Before you start**.
       <td width="50%" valign="top">
 <ol>
 <li>Open Horizon OC.</li>
-<li>Set Overrides to <strong>CPU 1020 / GPU 384 / RAM 1331</strong>.</li>
-<li>Run <strong>Matrixprod -> 1 minute</strong>.</li>
-<li>If it <strong>PASSes</strong>, lower Low VMIN to the <strong>next lower available value</strong>.</li>
+<li>Check the CPU voltages again around the clocks identified in Step 2.</li>
+<li>If the voltage steps have changed, update your Low VMIN test clocks using the same method from Step 2.</li>
+<li>Keep GPU at <strong>384 MHz</strong> and RAM at <strong>1331 MHz</strong>.</li>
+<li>Run <strong>Matrixprod -> 1 minute</strong> at each of your Low VMIN test clocks.</li>
+<li>If all test clocks <strong>PASS</strong>, lower Low VMIN to the <strong>next lower available value</strong>.</li>
 <li>Reboot.</li>
-<li>Set <strong>1020 / 384 / 1331</strong> again.</li>
-<li>Run <strong>Matrixprod for 1 minute</strong> again.</li>
-<li>If it <strong>PASSes</strong>, lower Low VMIN by another available step and repeat steps 5–7 with the new value.</li>
-<li>When a newly tested Low VMIN value <strong>FAILS</strong>, restore the <strong>previous passing Low VMIN value</strong> and reboot. That restored value is your candidate.</li>
+<li>Check the voltage steps again and update the test clocks if needed.</li>
+<li>Run <strong>Matrixprod for 1 minute</strong> again at each Low VMIN test clock.</li>
+<li>If all test clocks <strong>PASS</strong>, lower Low VMIN by another available step and repeat steps 7–9 with the new value.</li>
+<li>When any Low VMIN test clock <strong>FAILS</strong>, restore the <strong>previous passing Low VMIN value</strong> and reboot. That restored value is your candidate.</li>
 </ol>
       </td>
       <td width="50%" valign="top">
@@ -170,24 +215,18 @@ Keep VDD2 and VDDQ at the baseline values selected in **Before you start**.
   </tbody>
 </table>
 
-### Confirm the candidate at low CPU clocks
+### Confirm the candidate
 
-With the candidate Low VMIN, test:
-
-- **510 MHz**
-- **612 MHz**
-- **816 MHz**
-- **918 MHz**
-- **1020 MHz**
+With the candidate Low VMIN, check the CPU voltage steps once more and confirm your Low VMIN test clocks.
 
 Keep:
 
 - GPU: **384 MHz**
 - RAM: **1331 MHz**
 
-Run Matrixprod briefly at each CPU clock.
+Run **Matrixprod -> 1 hour** at each Low VMIN test clock.
 
-If all pass, run Matrixprod for **1 hour** at the low CPU clock that appeared most sensitive during the sweep. If none stands out, use the lowest tested clock as the long confirmation point.
+You do not need to separately test lower CPU clocks that use the same voltage. Test the **highest CPU frequency for each different voltage level** you identified in Step 2.
 
 Also check normal system behavior:
 
@@ -201,7 +240,7 @@ If anything fails, raise Low VMIN to the **previous mV value** and repeat the ch
 
 ---
 
-# 3. Find the Lowest Stable VDDQ
+# 4. Find the Lowest Stable VDDQ
 
 Keep your final CPU Low UV and Low VMIN. Keep the CPU UV table and High UV at the baseline values selected in **Before you start** so CPU settings remain unchanged while tuning RAM.
 
@@ -277,9 +316,9 @@ Keep the **lowest VDDQ that passes the full hour**.
 
 ---
 
-# 4. Find the Lowest Stable VDD2
+# 5. Find the Lowest Stable VDD2
 
-Keep your final VDDQ from Step 3. Keep all CPU settings unchanged while tuning VDD2.
+Keep your final VDDQ from Step 4. Keep all CPU settings unchanged while tuning VDD2.
 
 Start VDD2 from the baseline selected in **Before you start**:
 
@@ -351,7 +390,7 @@ Keep the **lowest VDD2 that passes the full hour**.
 
 ---
 
-# 5. Confirm Final VDDQ + VDD2 Together
+# 6. Confirm Final VDDQ + VDD2 Together
 
 Use your final:
 
@@ -405,7 +444,7 @@ Run:
 
 ---
 
-# 6. Confirm RAM at Normal Handheld Clocks
+# 7. Confirm RAM at Normal Handheld Clocks
 
 Reboot.
 
@@ -423,7 +462,7 @@ If it PASSes, your final VDDQ/VDD2 pair has now been checked at both stock RAM s
 
 ---
 
-# 7. Find the Best CPU High UV
+# 8. Find the Best CPU High UV
 
 Keep all final values found so far:
 
@@ -502,7 +541,7 @@ Keep the **highest High UV level that passes the full hour**.
 
 ---
 
-# 8. Confirm High UV + Final RAM Voltages
+# 9. Confirm High UV + Final RAM Voltages
 
 Reboot.
 
@@ -526,7 +565,7 @@ Do not immediately raise VDDQ or VDD2. Only investigate RAM voltages if reducing
 
 ---
 
-# 9. Final Normal Handheld Test
+# 10. Final Normal Handheld Test
 
 Reboot.
 
@@ -548,7 +587,7 @@ The GPU test here is a final validation of the inherited stock-clock GPU setting
 
 ---
 
-# 10. Final Nintendo Boost Test
+# 11. Final Nintendo Boost Test
 
 Reboot.
 
@@ -568,7 +607,7 @@ Everything must PASS.
 
 ---
 
-# 11. Final Real-World Test
+# 12. Final Real-World Test
 
 Remove all manual Overrides.
 
