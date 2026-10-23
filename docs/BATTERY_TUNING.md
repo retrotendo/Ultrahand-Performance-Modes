@@ -177,6 +177,7 @@ With the candidate Low VMIN, test:
 - **510 MHz**
 - **612 MHz**
 - **816 MHz**
+- **918 MHz**
 - **1020 MHz**
 
 Keep:
