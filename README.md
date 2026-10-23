@@ -30,7 +30,7 @@ See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTER
 
 On the development OLED, Red Dead Redemption was tested at the **same stock game clocks/settings** with **50% display brightness** and **0% volume**:
 
-| Setting | Stock — no OC/UV profile | OC Mode profile | Battery Mode profile |
+| Setting | Stock | OC Mode profile | Battery Mode profile |
 | --- | ---: | ---: | ---: |
 | VDD2 | 1175 mV | 1087.5 mV | ~912.5 mV |
 | VDDQ | 600 mV | 600 mV | 400 mV |
