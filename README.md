@@ -28,9 +28,9 @@ See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTER
 
 ### Example battery-life result
 
-On the development OLED, Red Dead Redemption was tested at the **same stock game clocks/settings** with **50% display brightness** and **0% volume**:
+On the development OLED (Speedo 1659/1677/1720), Red Dead Redemption was tested at the **same stock game clocks/settings** with **50% display brightness**, **0% volume** and **Flight Mode on**:
 
-| Setting | Stock | OC Mode profile | Battery Mode profile |
+| Setting | Stock | OC Mode | Battery Mode |
 | --- | ---: | ---: | ---: |
 | VDD2 | 1175 mV | 1087.5 mV | ~912.5 mV |
 | VDDQ | 600 mV | 600 mV | 400 mV |
