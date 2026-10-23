@@ -43,7 +43,7 @@ After the reboot, this is your starting point. From here, begin the undervolting
 
 The basic method is the same throughout the guide:
 
-**change one step -> reboot -> set Overrides -> short test -> repeat until first FAIL -> step back once -> long confirmation test**
+**change one step -> reboot -> set Overrides -> short test -> if it PASSes, change one more step -> reboot -> test again -> stop at the first failing setting -> restore the previous passing setting -> long confirmation test**
 
 ---
 
@@ -67,9 +67,41 @@ Keep the CPU UV table selected in **Before you start** unchanged throughout the 
 
 ### Does the Switch boot?
 
-| ✅ YES | ❌ NO |
-| --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase Low UV by **1 level**.<br><br>Example: **Low UV1 -> Low UV2**.<br><br>Reboot -> set **1020 / 384 / 1331** again -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, reduce Low UV by **1 level** and reboot. That previous level is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce Low UV by **1 level**.<br>5. Reboot normally.<br><br>The previous UV level is now your candidate. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">✅ YES</th>
+      <th width="50%">❌ NO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+<ol>
+<li>Open Horizon OC.</li>
+<li>Set Overrides to <strong>CPU 1020 / GPU 384 / RAM 1331</strong>.</li>
+<li>Run <strong>StressNX -> Matrixprod -> 1 minute</strong>.</li>
+<li>If it <strong>PASSes</strong>, increase Low UV by <strong>1 level</strong>.</li>
+<li>Reboot.</li>
+<li>Set <strong>1020 / 384 / 1331</strong> again.</li>
+<li>Run <strong>Matrixprod for 1 minute</strong> again.</li>
+<li>If it <strong>PASSes</strong>, increase Low UV by another <strong>1 level</strong> and repeat steps 5–7 with the new level.</li>
+<li>When a newly tested Low UV level <strong>FAILS</strong>, reduce Low UV by <strong>1 level</strong> and reboot. The previous passing level is your candidate.</li>
+</ol>
+      </td>
+      <td width="50%" valign="top">
+<ol>
+<li>Boot Hekate.</li>
+<li>Start <strong>CFW without Horizon OC / hoc.kip</strong>.</li>
+<li>Open Horizon OC.</li>
+<li>Reduce Low UV by <strong>1 level</strong>.</li>
+<li>Reboot normally.</li>
+<li>Use the restored Low UV level as your candidate.</li>
+</ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Confirm the candidate
 
@@ -101,9 +133,41 @@ Keep VDD2 and VDDQ at the baseline values selected in **Before you start**.
 
 ### Does the Switch boot?
 
-| ✅ YES | ❌ NO |
-| --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1020 / GPU 384 / RAM 1331**.<br><br>Run **Matrixprod -> 1 minute**.<br><br>If it **PASSes**, lower Low VMIN to the next lower available value.<br><br>Reboot -> set Overrides again -> test 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, restore the **previous Low VMIN value** and reboot. That previous value is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Restore the **previous Low VMIN value**.<br>5. Reboot normally.<br><br>The restored value is your candidate. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">✅ YES</th>
+      <th width="50%">❌ NO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+<ol>
+<li>Open Horizon OC.</li>
+<li>Set Overrides to <strong>CPU 1020 / GPU 384 / RAM 1331</strong>.</li>
+<li>Run <strong>Matrixprod -> 1 minute</strong>.</li>
+<li>If it <strong>PASSes</strong>, lower Low VMIN to the <strong>next lower available value</strong>.</li>
+<li>Reboot.</li>
+<li>Set <strong>1020 / 384 / 1331</strong> again.</li>
+<li>Run <strong>Matrixprod for 1 minute</strong> again.</li>
+<li>If it <strong>PASSes</strong>, lower Low VMIN by another available step and repeat steps 5–7 with the new value.</li>
+<li>When a newly tested Low VMIN value <strong>FAILS</strong>, restore the <strong>previous passing Low VMIN value</strong> and reboot. That restored value is your candidate.</li>
+</ol>
+      </td>
+      <td width="50%" valign="top">
+<ol>
+<li>Boot Hekate.</li>
+<li>Start <strong>CFW without Horizon OC / hoc.kip</strong>.</li>
+<li>Open Horizon OC.</li>
+<li>Restore the <strong>previous Low VMIN value</strong>.</li>
+<li>Reboot normally.</li>
+<li>Use the restored Low VMIN value as your candidate.</li>
+</ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Confirm the candidate at low CPU clocks
 
@@ -148,8 +212,6 @@ Only change VDDQ in this step.
 
 ### Start
 
-Lower:
-
 Lower VDDQ by **10 mV**.
 
 Example from the conservative baseline:
@@ -160,9 +222,42 @@ Reboot.
 
 ### Does the Switch boot?
 
-| ✅ YES | ❌ NO |
-| --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDDQ by another **10 mV**.<br><br>Example: **590 -> 580 -> 570 -> 560 mV**.<br><br>After every change: Reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, increase VDDQ by **10 mV** and reboot. That previous value is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDDQ by **10 mV**.<br>5. Reboot normally.<br><br>Example: **410 mV does not boot -> restore 420 mV**.<br><br>The restored value is your candidate. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">✅ YES</th>
+      <th width="50%">❌ NO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+<ol>
+<li>Open Horizon OC.</li>
+<li>Set Overrides to <strong>CPU 1785 / GPU 76.8 / RAM 1600</strong>.</li>
+<li>Run <strong>Benchmark Toolbox -> MemTester -> 1 minute</strong>.</li>
+<li>If it <strong>PASSes</strong>, lower VDDQ by another <strong>10 mV</strong>.</li>
+<li>Reboot.</li>
+<li>Set <strong>1785 / 76.8 / 1600</strong> again.</li>
+<li>Run <strong>MemTester for 1 minute</strong> again.</li>
+<li>If it <strong>PASSes</strong>, lower VDDQ by another <strong>10 mV</strong> and repeat steps 5–7 with the new value.</li>
+<li>When a newly tested VDDQ value <strong>FAILS</strong>, increase VDDQ by <strong>10 mV</strong> and reboot. The previous passing value is your candidate.</li>
+</ol>
+      </td>
+      <td width="50%" valign="top">
+<ol>
+<li>Boot Hekate.</li>
+<li>Start <strong>CFW without Horizon OC / hoc.kip</strong>.</li>
+<li>Open Horizon OC.</li>
+<li>Increase VDDQ by <strong>10 mV</strong>.</li>
+<li>Reboot normally.</li>
+<li>Use the restored VDDQ value as your candidate.</li>
+</ol>
+<p>Example: <strong>410 mV does not boot -> restore 420 mV</strong>.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Confirm the candidate
 
@@ -200,9 +295,43 @@ Reboot.
 
 ### Does the Switch boot?
 
-| ✅ YES | ❌ NO |
-| --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **Benchmark Toolbox -> MemTester -> 1 minute**.<br><br>If it **PASSes**, lower VDD2 by another **12.5 mV**.<br><br>Reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, increase VDD2 by **12.5 mV** and reboot. That previous value is your candidate.<br><br>Horizon OC may display half-step values rounded, e.g. **937.5 -> 937 mV** and **912.5 -> 912 mV**. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Increase VDD2 by **12.5 mV**.<br>5. Reboot normally.<br><br>Example: **900 mV does not boot -> restore 912.5 mV**.<br><br>The restored value is your candidate. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">✅ YES</th>
+      <th width="50%">❌ NO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+<ol>
+<li>Open Horizon OC.</li>
+<li>Set Overrides to <strong>CPU 1785 / GPU 76.8 / RAM 1600</strong>.</li>
+<li>Run <strong>Benchmark Toolbox -> MemTester -> 1 minute</strong>.</li>
+<li>If it <strong>PASSes</strong>, lower VDD2 by another <strong>12.5 mV</strong>.</li>
+<li>Reboot.</li>
+<li>Set <strong>1785 / 76.8 / 1600</strong> again.</li>
+<li>Run <strong>MemTester for 1 minute</strong> again.</li>
+<li>If it <strong>PASSes</strong>, lower VDD2 by another <strong>12.5 mV</strong> and repeat steps 5–7 with the new value.</li>
+<li>When a newly tested VDD2 value <strong>FAILS</strong>, increase VDD2 by <strong>12.5 mV</strong> and reboot. The previous passing value is your candidate.</li>
+</ol>
+<p>Horizon OC may display half-step values rounded, e.g. <strong>937.5 -> 937 mV</strong> and <strong>912.5 -> 912 mV</strong>.</p>
+      </td>
+      <td width="50%" valign="top">
+<ol>
+<li>Boot Hekate.</li>
+<li>Start <strong>CFW without Horizon OC / hoc.kip</strong>.</li>
+<li>Open Horizon OC.</li>
+<li>Increase VDD2 by <strong>12.5 mV</strong>.</li>
+<li>Reboot normally.</li>
+<li>Use the restored VDD2 value as your candidate.</li>
+</ol>
+<p>Example: <strong>900 mV does not boot -> restore 912.5 mV</strong>.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Confirm the candidate
 
@@ -241,9 +370,36 @@ Run:
 
 ### Did the combined test pass?
 
-| ✅ YES | ❌ NO |
-| --- | --- |
-| Keep both final values. The VDDQ/VDD2 pair is confirmed at **1785 / 76.8 / 1600**. | Do **not** raise both voltages together.<br><br>First increase **VDDQ by 10 mV**. Reboot -> set **1785 / 76.8 / 1600** -> MemTester for 1 hour.<br><br>If it still FAILS, restore VDDQ to the previous value. Then increase **VDD2 by 12.5 mV**. Reboot -> set the Overrides again -> repeat MemTester for 1 hour.<br><br>This keeps troubleshooting to one voltage at a time. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">✅ YES</th>
+      <th width="50%">❌ NO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+<ol>
+<li>Keep both final values.</li>
+<li>The VDDQ/VDD2 pair is confirmed at <strong>1785 / 76.8 / 1600</strong>.</li>
+</ol>
+      </td>
+      <td width="50%" valign="top">
+<ol>
+<li>Do <strong>not</strong> raise both voltages together.</li>
+<li>Increase <strong>VDDQ by 10 mV</strong>.</li>
+<li>Reboot and set <strong>1785 / 76.8 / 1600</strong> again.</li>
+<li>Run <strong>MemTester for 1 hour</strong>.</li>
+<li>If it still <strong>FAILS</strong>, restore VDDQ to the previous value.</li>
+<li>Increase <strong>VDD2 by 12.5 mV</strong>.</li>
+<li>Reboot, set the Overrides again and run <strong>MemTester for 1 hour</strong>.</li>
+<li>Keep troubleshooting one voltage at a time.</li>
+</ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
@@ -292,9 +448,41 @@ Reboot.
 
 ### Does the Switch boot?
 
-| ✅ YES | ❌ NO |
-| --- | --- |
-| Open Horizon OC and set Overrides: **CPU 1785 / GPU 76.8 / RAM 1600**.<br><br>Run **StressNX -> Matrixprod -> 1 minute**.<br><br>If it **PASSes**, increase High UV by **1 level**.<br><br>Reboot -> set **1785 / 76.8 / 1600** -> Matrixprod for 1 minute.<br><br>Repeat until the first FAIL.<br><br>If the 1-minute test FAILS, reduce High UV by **1 level** and reboot. That previous level is your candidate. | 1. Boot Hekate.<br>2. Start **CFW without Horizon OC / hoc.kip**.<br>3. Open Horizon OC.<br>4. Reduce High UV by **1 level**.<br>5. Reboot normally.<br><br>The previous High UV level is now your candidate. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">✅ YES</th>
+      <th width="50%">❌ NO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+<ol>
+<li>Open Horizon OC.</li>
+<li>Set Overrides to <strong>CPU 1785 / GPU 76.8 / RAM 1600</strong>.</li>
+<li>Run <strong>StressNX -> Matrixprod -> 1 minute</strong>.</li>
+<li>If it <strong>PASSes</strong>, increase High UV by <strong>1 level</strong>.</li>
+<li>Reboot.</li>
+<li>Set <strong>1785 / 76.8 / 1600</strong> again.</li>
+<li>Run <strong>Matrixprod for 1 minute</strong> again.</li>
+<li>If it <strong>PASSes</strong>, increase High UV by another <strong>1 level</strong> and repeat steps 5–7 with the new level.</li>
+<li>When a newly tested High UV level <strong>FAILS</strong>, reduce High UV by <strong>1 level</strong> and reboot. The previous passing level is your candidate.</li>
+</ol>
+      </td>
+      <td width="50%" valign="top">
+<ol>
+<li>Boot Hekate.</li>
+<li>Start <strong>CFW without Horizon OC / hoc.kip</strong>.</li>
+<li>Open Horizon OC.</li>
+<li>Reduce High UV by <strong>1 level</strong>.</li>
+<li>Reboot normally.</li>
+<li>Use the restored High UV level as your candidate.</li>
+</ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ### Confirm the candidate
 
