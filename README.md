@@ -28,7 +28,7 @@ See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTER
 
 ### Example battery-life result
 
-On the development OLED (Speedo 1659/1677/1720, Ram NEE), Red Dead Redemption was tested at the **same stock game clocks/settings** with **50% display brightness**, **0% volume** and **Flight Mode on**:
+On the development OLED (Speedo 1659/1677/1720, Ram NEE) with a well optimized OC profile made by myself, I only lowered VDD2 and VDDQ. Than Red Dead Redemption was tested at the **same stock game clocks/settings** with **50% display brightness**, **0% volume** and **Flight Mode on**:
 
 | Setting | Stock | OC Mode | Battery Mode |
 | --- | ---: | ---: | ---: |
