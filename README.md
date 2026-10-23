@@ -24,7 +24,7 @@ Battery Mode is therefore not intended as a second maximum-OC profile. It is a *
 
 Once a stable OC Mode already exists, the main Battery Mode efficiency controls are typically **RAM VDD2**, **RAM VDDQ**, **CPU High UV** and **CPU Low UV** for normal stock-frequency handheld CPU operation. Other Horizon OC / HOC Toolkit values can normally remain at the known-good settings inherited from OC Mode unless you have a specific reason to change them.
 
-See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) for the complete tuning process or use your own known values. In short if you tuned in a proper OC Profil before: Set CPU, CPU Boost and Ram Max Frequencies to the Max stock frequencies and find your lowest VDD2 and VDDQ voltages to be stable at these frequencies range.   
+See the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) for the complete tuning process or use your own known values. In short if you tuned in a proper OC Profil before: Set CPU Max Clock and CPU Boost Clock to their lowest selectable values in HOC Toolkit, and set RAM Max Clock to the stock limit. The stock CPU Boost limit cannot be selected directly in Horizon OC, so it must be set through HOC Toolkit. After applying the settings and rebooting CFW, Horizon OC will reflect the new CPU limits. Then find the lowest stable VDD2 and VDDQ values for this reduced stock-frequency operating range.
 
 ### Example battery-life result
 
@@ -117,7 +117,7 @@ Keep the initial setup simple. Detailed undervolting belongs in the Battery tuni
 4. Open **Setup -> Backup Files** and choose **Create Safety Backup**.
 5. On **Main**, choose **Save Settings -> as Battery Mode**. This creates a temporary Battery Mode copy from the known-good OC profile.
 6. Choose **Battery Mode**. Performance Modes saves OC Mode, loads Battery Mode and **automatically reboots CFW**.
-7. Follow the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) to find your stable Battery Mode values or use your own known values. In short if you tuned in a proper OC Profil before: Set CPU, CPU Boost and Ram Max Frequencies to the Max stock frequencies and find your lowest VDD2 and VDDQ voltages to be stable at these frequencies range.   
+7. Follow the [Battery Profile – Simple Step-by-Step Undervolting Guide](docs/BATTERY_TUNING.md) to find your stable Battery Mode values or use your own known values. In short if you tuned in a proper OC Profil before: Set CPU Max Clock and CPU Boost Clock to their lowest selectable values in HOC Toolkit, and set RAM Max Clock to the stock limit. The stock CPU Boost limit cannot be selected directly in Horizon OC, so it must be set through HOC Toolkit. After applying the settings and rebooting CFW, Horizon OC will reflect the new CPU limits. Then find the lowest stable VDD2 and VDDQ values for this reduced stock-frequency operating range.
 8. When Battery Mode is stable, choose **Save Settings -> as Battery Mode**.
 9. Choose **OC Mode**. Performance Modes restores OC Mode and **automatically reboots CFW**.
 10. If you want Battery Mode to use stock/default per-game clocks, run **Setup -> Reset Battery App Profiles -> STOCK** while **OC Mode is active**.
