@@ -176,8 +176,6 @@ The package uses the visible mode names directly as its state values:
 - `Battery Mode`
 - `OC Mode`
 
-There are no legacy `BATTERY` or `PERFORMANCE` state values in the current package. The profile files remain stored under `Battery/` and `OCMode/`.
-
 ## Safety behavior
 
 - An automatic profile save only occurs when the current state is an exact confirmed match.
