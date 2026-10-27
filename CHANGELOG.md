@@ -11,6 +11,7 @@
 - Per-title Horizon clock profiles included automatically.
 - Battery app-profile reset to stock/default clocks.
 - Manual Safety Backup and Restore, including ReverseNX-RT snapshots for active/Battery/OC Mode states.
+- Fixed Safety Backup / Restore control flow so all backup files are processed before restore and Restore reaches the reboot command.
 - Exact-state protection prevents automatic profile overwrite when state is unknown or unset.
 - `Check Files` reports `All 4 files: OK` when both profile configs and KIPs are present.
 - OC Mode profile storage uses `OCMode/` for consistency with the visible menu name.
